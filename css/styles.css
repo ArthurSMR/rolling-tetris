@@ -223,6 +223,10 @@ footer .footer .coluna .livre ul li {
     width: 30px;
 }
 
+.container .game-container .tetromino {
+    background-color: red;
+}
+
 .container .content .actions {
     padding-top: 0.8rem;
     padding-bottom: 0.8rem;
