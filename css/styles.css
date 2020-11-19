@@ -176,13 +176,16 @@ footer .footer .coluna .livre ul li {
 .wrapper,
 .actions {
     display: flex;
-    justify-content: center;
+    justify-items: center;
 }
 
 .container .content {
     width: 30%;
     color: white;
     margin-top: 0.4rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .container .content .game-stats {
@@ -227,10 +230,11 @@ footer .footer .coluna .livre ul li {
     background-color: red;
 }
 
-.container .content .actions {
-    padding-top: 0.8rem;
+.container .content .game-stats .actions {
+    padding-top: 100%;
+    width: 100%;
     padding-bottom: 0.8rem;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 #btn-primary,
