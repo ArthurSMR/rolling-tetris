@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap" rel="stylesheet">
     <title>Rolling Tetris</title>
 </head>
 
@@ -29,6 +30,21 @@
         </div>
     </header>
 
+    <div class="table-picker" id="table-picker">
+        <p>Escolha o tamanho do tabuleiro:</p>
+        <form id="table-picker-form">
+            <div class="table-picker-input">
+                <p>Largura:</p>
+                <input id="width" type="number" required>
+            </div>
+            <div class="table-picker-input">
+                <p>Altura:</p>
+                <input id="height" type="number" required>
+            </div>
+            <button id="btn-table-picker">Jogar</button>
+        </form>
+    </div>
+
     <div class="container">
         <div class="content">
             <div class="game-stats">
@@ -47,10 +63,7 @@
                 </div>
             </div>
             <div class="game-container">
-                <!-- 
-                    <canvas width="340" height="480"></canvas>
-                 -->
-                <img src="mock/tetris.svg" alt="tetris">
+                <!--game table-->
             </div>
             <div class="actions">
                 <a href="menu.html">
@@ -93,14 +106,16 @@
                 <div class="alunos">
                     <ul type="none">
                         <li>Arthur Rodrigues - 213315</li>
-                        <li>Igor Martins     - 217972</li>
-                        <li>Victor Pereira   - 206588</li>
-                        <li>Vinícius Nonato  - 245394</li>
+                        <li>Igor Martins - 217972</li>
+                        <li>Victor Pereira - 206588</li>
+                        <li>Vinícius Nonato - 245394</li>
                     </ul>
                 </div>
             </div>
         </div>
     </footer>
+
+    <script src="scripts.js"></script>
 </body>
 
 </html>
