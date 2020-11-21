@@ -230,6 +230,10 @@ footer .footer .coluna .livre ul li {
     background-color: red;
 }
 
+.container .game-container .tetromino-fixed {
+    background-color: green;
+}
+
 .container .content .game-stats .actions {
     padding-top: 100%;
     width: 100%;
