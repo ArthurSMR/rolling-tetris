@@ -53,39 +53,67 @@ function play() {
     x = parseInt(tableWidth / 2);
     y = 3;
 
+    currentPiece = createPiece();
+    draw(currentPiece);
     movePiece();
 }
 
+// GAME LOGIC
+
+// 1- Start
+// 2- Draw Piece
+// 3- Verifica se pode pode - Se puder, move() e da respawn piece. Se NÃO puder, cria outra peça direto
+
+
+// This method will move piece if the piece is able to move
 function movePiece() {
 
-    timer = setTimeout(() => {
+    if (canMovePiece()) {
+        timer = setTimeout(() => {
 
-        piece = document.querySelectorAll(".container .game-container table tr .tetromino");
-        if (piece != null) {
-            piece.forEach((p) => {
-                p.removeAttribute('class');
-            })
-        }
-        
-        currentPiece = createPiece();
-        draw(currentPiece);
-        y++;
-        checkForColision();
-    }, 200);
-}
+            deletePieceTracks();
 
-function checkForColision() {
-
-    if (lines[y].cells[x].className == 'tetromino-fixed') {
-        respawnPiece();
-    } else if (y < tableHeight - 2) {
-        movePiece();
+            y++;
+            currentPiece = createPiece();
+            draw(currentPiece);
+            
+            movePiece();
+        }, 200);
     } else {
         respawnPiece();
     }
-    
 }
 
+// VALIDATIONS 
+
+// This method will validate if the piece can move
+function canMovePiece() {
+
+    // if (willColideWithTetrominoFixed()) {
+    //     return false;
+    // } else
+    
+     if (y + 1 < tableHeight - 2) { // If the piece is inside the table
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// This method will validade if the tetromino will collide with a fixed piece
+function willColideWithTetrominoFixed() {
+
+    currentPiece.forEach((piece) => {
+        var nextY = y + 1;
+        // if (lines[y+1].cells[x].className == 'tetromino-fixed') {
+            if (piece[nextY].cells[x].className == 'tetromino-fixed') { // TODO: NÃO CONSIGO VALIDAR A POSICAO ABAIXO DE CADA CELULA
+                return true;
+        }
+    })
+    return false;
+}
+
+// This method will respawn another piece at the top
 function respawnPiece() {
     clearTimeout(timer);
 
@@ -99,21 +127,16 @@ function respawnPiece() {
     movePiece();
 }
 
-function willColideWithTetromino() {
+// DRAW
 
-    currentPiece.forEach((cp) => { 
-        if (lines[y].cells[x].className == 'tetromino-fixed') {
-            respawnPiece();
-        }
-    })
-}
-
+// This method will draw a piece
 function draw(cells) {
     cells.forEach((cell) => {
         cell.classList.add('tetromino');
     })
 }
 
+// This method will create a piece (we need to return some random piece)
 function createPiece() {
 
     const tPiece = [
@@ -164,7 +187,17 @@ function createPiece() {
 
 }
 
-//detecting arrow key presses
+// This method will delete the tracks when the piece is moving
+function deletePieceTracks() {
+    piece = document.querySelectorAll(".container .game-container table tr .tetromino");
+    if (piece != null) {
+        piece.forEach((p) => {
+            p.removeAttribute('class');
+        })
+    }
+}
+
+// Detecting arrow key presses
 document.addEventListener('keydown', function(e) {
     switch (e.keyCode) {
         case 37: // Move to left
