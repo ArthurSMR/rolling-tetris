@@ -89,9 +89,10 @@ function movePiece() {
 // This method will validate if the piece can move
 function canMovePiece() {
 
-    // if (willColideWithTetrominoFixed()) {
-    //     return false;
-    // } else
+    if (willColideWithTetrominoFixed()) {
+        console.log('true')
+        return false;
+    } else
     
      if (y + 1 < tableHeight - 2) { // If the piece is inside the table
         return true;
@@ -103,14 +104,81 @@ function canMovePiece() {
 // This method will validade if the tetromino will collide with a fixed piece
 function willColideWithTetrominoFixed() {
 
+    var willColide = false
+
     currentPiece.forEach((piece) => {
-        var nextY = y + 1;
-        // if (lines[y+1].cells[x].className == 'tetromino-fixed') {
-            if (piece[nextY].cells[x].className == 'tetromino-fixed') { // TODO: NÃO CONSIGO VALIDAR A POSICAO ABAIXO DE CADA CELULA
-                return true;
+        var nextRow = piece.parentNode.parentNode.rows[y+1]
+        var currentRow = piece.parentNode.parentNode.rows[y]
+        
+        // Get the cells from the current row and then check where our piece is
+        for (var x = 0; x < currentRow.cells.length; x++) {
+            if (currentRow.cells[x].className == 'tetromino') {
+                
+                // if found where the piece is, check if the position below it is occupied
+                if (nextRow.cells[x].className == 'tetromino-fixed') {
+                    willColide = true
+                }
+            }
         }
     })
-    return false;
+    return willColide
+}
+
+function willColideWithBorder() {
+
+    var willColide = false
+
+    if ((willColideToLeft() || willColideToRight())) {
+        willColide = true
+    }
+
+    return willColide
+}
+
+function willColideToLeft() {
+
+    var indeces = []
+    var currentRow;
+    
+    currentPiece.forEach((piece) => {
+        indeces.push(piece.cellIndex)
+        currentRow = piece.parentNode.parentNode.rows[y]
+    })
+
+    var min = Math.min(...indeces)
+
+    if (currentRow.cells[min - 1].className == 'tetromino-fixed') {
+        return true
+    }
+
+    if (min <= 0) {
+        return true
+    }
+
+    return false
+}
+
+function willColideToRight() {
+
+    var indeces = []
+    var currentRow;
+    
+    currentPiece.forEach((piece) => {
+        indeces.push(piece.cellIndex)
+        currentRow = piece.parentNode.parentNode.rows[y]
+    })
+
+    var max = Math.max(...indeces)
+
+    if (currentRow.cells[max + 1].className == 'tetromino-fixed') {
+        return true
+    }
+
+    if (max >= tableWidth - 1) {
+        return true
+    }
+
+    return false
 }
 
 // This method will respawn another piece at the top
@@ -123,6 +191,7 @@ function respawnPiece() {
     })
     
     y = 3;
+    x = parseInt(tableWidth / 2);
 
     movePiece();
 }
@@ -199,12 +268,15 @@ function deletePieceTracks() {
 
 // Detecting arrow key presses
 document.addEventListener('keydown', function(e) {
-    switch (e.keyCode) {
-        case 37: // Move to left
-            x = x - 1;
-            break;
-        case 39: // Move piece to right
-            x = x + 1;
-            break;
+
+    if (!willColideWithBorder()) {
+        switch (e.keyCode) {
+            case 37: // Move to left
+                x = x - 1;
+                break;
+            case 39: // Move piece to right
+                x = x + 1;
+                break;
+        }
     }
 });
