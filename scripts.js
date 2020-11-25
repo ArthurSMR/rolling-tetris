@@ -126,24 +126,18 @@ function willColideWithTetrominoFixed() {
 
 function willColideWithBorder() {
 
-    var willColide = false
-
-    if ((willColideToLeft() || willColideToRight())) {
-        willColide = true
-    }
-
-    return willColide
-}
-
-function willColideToLeft() {
-
     var indeces = []
     var currentRow;
-    
+
     currentPiece.forEach((piece) => {
         indeces.push(piece.cellIndex)
         currentRow = piece.parentNode.parentNode.rows[y]
     })
+
+    return willColideToRight(indeces, currentRow) || willColideToLeft(indeces, currentRow)
+}
+
+function willColideToLeft(indeces, currentRow) {
 
     var min = Math.min(...indeces)
 
@@ -158,15 +152,7 @@ function willColideToLeft() {
     return false
 }
 
-function willColideToRight() {
-
-    var indeces = []
-    var currentRow;
-    
-    currentPiece.forEach((piece) => {
-        indeces.push(piece.cellIndex)
-        currentRow = piece.parentNode.parentNode.rows[y]
-    })
+function willColideToRight(indeces, currentRow) {
 
     var max = Math.max(...indeces)
 
