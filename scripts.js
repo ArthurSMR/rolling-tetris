@@ -12,7 +12,6 @@ var x = 0;
 var y = 0;
 var timer;
 
-
 function handleSubmit(event) {
     event.preventDefault();
 
@@ -62,8 +61,7 @@ function play() {
 
 // 1- Start
 // 2- Draw Piece
-// 3- Verifica se pode pode - Se puder, move() e da respawn piece. Se NÃO puder, cria outra peça direto
-
+// 3- Verify if can move - if can, move() is called and then, respawn another piece. If can't move, call direct respawn piece
 
 // This method will move piece if the piece is able to move
 function movePiece() {
@@ -124,7 +122,9 @@ function willColideWithTetrominoFixed() {
     return willColide
 }
 
-function willColideWithBorder() {
+// This method will move the piece to left or right
+// direction could be either 'left' or 'right'
+function moveTo(direction) {
 
     var indeces = []
     var currentRow;
@@ -134,9 +134,25 @@ function willColideWithBorder() {
         currentRow = piece.parentNode.parentNode.rows[y]
     })
 
-    return willColideToRight(indeces, currentRow) || willColideToLeft(indeces, currentRow)
+    switch(direction) {
+        case 'left':
+            if (!willColideToLeft(indeces, currentRow)) {
+                x = x - 1
+            }
+            break
+        case 'right':
+            if (!willColideToRight(indeces, currentRow)) {
+                x = x + 1
+            }
+            break
+        default:
+            break
+    }
 }
 
+// COLISIONS
+
+// This method will validate if the piece will colide to another fixed piece at left position
 function willColideToLeft(indeces, currentRow) {
 
     var min = Math.min(...indeces)
@@ -152,6 +168,7 @@ function willColideToLeft(indeces, currentRow) {
     return false
 }
 
+// This method will validate if the piece will colide to another fixed piece at right position
 function willColideToRight(indeces, currentRow) {
 
     var max = Math.max(...indeces)
@@ -255,14 +272,12 @@ function deletePieceTracks() {
 // Detecting arrow key presses
 document.addEventListener('keydown', function(e) {
 
-    if (!willColideWithBorder()) {
         switch (e.keyCode) {
-            case 37: // Move to left
-                x = x - 1;
+            case 37: 
+                moveTo('left')
                 break;
             case 39: // Move piece to right
-                x = x + 1;
+                moveTo('right')
                 break;
         }
-    }
 });
