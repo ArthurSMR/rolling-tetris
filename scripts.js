@@ -52,9 +52,11 @@ function play() {
     x = parseInt(tableWidth / 2);
     y = 3;
 
-    currentPiece = createPiece();
+
+    var r = Math.floor(Math.random() * 6);
+    currentPiece = createPiece(r);
     draw(currentPiece);
-    movePiece();
+    movePiece(r);
 }
 
 // GAME LOGIC
@@ -64,7 +66,9 @@ function play() {
 // 3- Verify if can move - if can, move() is called and then, respawn another piece. If can't move, call direct respawn piece
 
 // This method will move piece if the piece is able to move
-function movePiece() {
+function movePiece(r) {
+
+    var p = r;
 
     if (canMovePiece()) {
         timer = setTimeout(() => {
@@ -72,10 +76,10 @@ function movePiece() {
             deletePieceTracks();
 
             y++;
-            currentPiece = createPiece();
+            currentPiece = createPiece(p);
             draw(currentPiece);
             
-            movePiece();
+            movePiece(p);
         }, 200);
     } else {
         respawnPiece();
@@ -196,7 +200,9 @@ function respawnPiece() {
     y = 3;
     x = parseInt(tableWidth / 2);
 
-    movePiece();
+    var r = Math.floor(Math.random() * 6);
+
+    movePiece(r);
 }
 
 // DRAW
@@ -209,7 +215,9 @@ function draw(cells) {
 }
 
 // This method will create a piece (we need to return some random piece)
-function createPiece() {
+function createPiece(r) {
+
+    var p = r;
 
     const tPiece = [
         [lines[y].cells[x], lines[y].cells[x + 1], lines[y].cells[x - 1], lines[y + 1].cells[x]],
@@ -253,9 +261,10 @@ function createPiece() {
         [lines[y].cells[x], lines[y].cells[x + 1], lines[y].cells[x + 2], lines[y].cells[x + 3]],
     ]
 
-    const tetrominos = [oPiece, iPiece, uPiece, lPiece, jPiece];
 
-    return iPiece[1];
+    const tetrominos = [tPiece[1], uPiece[1], lPiece[1], jPiece[1], oPiece[1], iPiece[1]];
+
+    return tetrominos[p];
 
 }
 
