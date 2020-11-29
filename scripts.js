@@ -1,292 +1,269 @@
-const tablePicker = document.getElementById("table-picker");
-const tablePickerBtn = document.getElementById("table-picker-form");
-const gameContainer = document.querySelector(".container .game-container");
+document.addEventListener('DOMContentLoaded', () => {
+    // TODO: we can also get the grid size from user
+    const GRID_WIDTH = 10
+    const GRID_HEIGHT = 20
+    const GRID_SIZE = GRID_WIDTH * GRID_HEIGHT
 
-tablePickerBtn.addEventListener('submit', handleSubmit);
+    // no need to type 200 divs :)
+    const grid = createGrid();
+    let squares = Array.from(grid.querySelectorAll('div'))
+    const startBtn = document.querySelector('.button')
+    const hamburgerBtn = document.querySelector('.toggler')
+    const menu = document.querySelector('.menu')
+    const span = document.getElementsByClassName('close')[0]
+    const scoreDisplay = document.querySelector('.score-display')
+    const linesDisplay = document.querySelector('.lines-score')
+    let currentIndex = 0
+    let currentRotation = 0
+    const width = 10
+    let score = 0
+    let lines = 0
+    let timerId
+    let nextRandom = 0
 
-var tableWidth = 0;
-var tableHeight = 0;
-var lines = null;
-var currentPiece;
-var x = 0;
-var y = 0;
-var timer;
+    // const colors = [
+    //     'url(images/blue_block.png)',
+    //     'url(images/pink_block.png)',
+    //     'url(images/purple_block.png)',
+    //     'url(images/peach_block.png)',
+    //     'url(images/yellow_block.png)'
+    // ]
 
-function handleSubmit(event) {
-    event.preventDefault();
 
-    tableWidth = document.getElementById("width").value;
-    tableHeight = document.getElementById("height").value;
-
-    if (tableWidth >= 10 && tableWidth <= 22) {
-        if (tableHeight >= 22 && tableHeight <= 44) {
-            createTable(tableWidth, tableHeight);
-            tablePicker.remove();
+    function createGrid() {
+        // the main grid
+        let grid = document.querySelector(".grid")
+        for (let i = 0; i < GRID_SIZE; i++) {
+            let gridElement = document.createElement("div")
+            grid.appendChild(gridElement)
         }
-    }
-}
 
-function createTable(width, height) {
-    var table = document.createElement('table');
-
-    for (let i = 0; i < height; i++) {
-        var row = document.createElement('tr');
-
-        for (let j = 0; j < width; j++) {
-            var column = document.createElement('td');
-            row.append(column);
+        // set base of grid
+        for (let i = 0; i < GRID_WIDTH; i++) {
+            let gridElement = document.createElement("div")
+            gridElement.setAttribute("class", "block3")
+            grid.appendChild(gridElement)
         }
-        table.append(row);
-    }
 
-    table.append(document.createElement('tr'));
-
-    gameContainer.append(table);
-
-    lines = table.rows;
-
-    play();
-}
-
-function play() {
-    x = parseInt(tableWidth / 2);
-    y = 3;
-
-
-    var r = Math.floor(Math.random() * 6);
-    currentPiece = createPiece(r);
-    draw(currentPiece);
-    movePiece(r);
-}
-
-// GAME LOGIC
-
-// 1- Start
-// 2- Draw Piece
-// 3- Verify if can move - if can, move() is called and then, respawn another piece. If can't move, call direct respawn piece
-
-// This method will move piece if the piece is able to move
-function movePiece(r) {
-
-    var p = r;
-
-    if (canMovePiece()) {
-        timer = setTimeout(() => {
-
-            deletePieceTracks();
-
-            y++;
-            currentPiece = createPiece(p);
-            draw(currentPiece);
-            
-            movePiece(p);
-        }, 200);
-    } else {
-        respawnPiece();
-    }
-}
-
-// VALIDATIONS 
-
-// This method will validate if the piece can move
-function canMovePiece() {
-
-    if (willColideWithTetrominoFixed()) {
-        console.log('true')
-        return false;
-    } else
-    
-     if (y + 1 < tableHeight - 2) { // If the piece is inside the table
-        return true;
-    } else {
-        return false;
-    }
-}
-
-// This method will validade if the tetromino will collide with a fixed piece
-function willColideWithTetrominoFixed() {
-
-    var willColide = false
-
-    currentPiece.forEach((piece) => {
-        var nextRow = piece.parentNode.parentNode.rows[y+1]
-        var currentRow = piece.parentNode.parentNode.rows[y]
-        
-        // Get the cells from the current row and then check where our piece is
-        for (var x = 0; x < currentRow.cells.length; x++) {
-            if (currentRow.cells[x].className == 'tetromino') {
-                
-                // if found where the piece is, check if the position below it is occupied
-                if (nextRow.cells[x].className == 'tetromino-fixed') {
-                    willColide = true
-                }
-            }
+        let previousGrid = document.querySelector(".previous-grid")
+        // Since 16 is the max grid size in which all the Tetrominoes 
+        // can fit in we create one here
+        for (let i = 0; i < 16; i++) {
+            let gridElement = document.createElement("div")
+            previousGrid.appendChild(gridElement);
         }
-    })
-    return willColide
-}
-
-// This method will move the piece to left or right
-// direction could be either 'left' or 'right'
-function moveTo(direction) {
-
-    var indeces = []
-    var currentRow;
-
-    currentPiece.forEach((piece) => {
-        indeces.push(piece.cellIndex)
-        currentRow = piece.parentNode.parentNode.rows[y]
-    })
-
-    switch(direction) {
-        case 'left':
-            if (!willColideToLeft(indeces, currentRow)) {
-                x = x - 1
-            }
-            break
-        case 'right':
-            if (!willColideToRight(indeces, currentRow)) {
-                x = x + 1
-            }
-            break
-        default:
-            break
-    }
-}
-
-// COLISIONS
-
-// This method will validate if the piece will colide to another fixed piece at left position
-function willColideToLeft(indeces, currentRow) {
-
-    var min = Math.min(...indeces)
-
-    if (currentRow.cells[min - 1].className == 'tetromino-fixed') {
-        return true
+        return grid;
     }
 
-    if (min <= 0) {
-        return true
+
+    //assign functions to keycodes
+    function control(e) {
+        if (e.keyCode === 39)
+            moveright()
+        else if (e.keyCode === 38)
+            rotate()
+        else if (e.keyCode === 37)
+            moveleft()
+        else if (e.keyCode === 40)
+            moveDown()
     }
 
-    return false
-}
+    // the classical behavior is to speed up the block if down button is kept pressed so doing that
+    document.addEventListener('keydown', control)
 
-// This method will validate if the piece will colide to another fixed piece at right position
-function willColideToRight(indeces, currentRow) {
-
-    var max = Math.max(...indeces)
-
-    if (currentRow.cells[max + 1].className == 'tetromino-fixed') {
-        return true
-    }
-
-    if (max >= tableWidth - 1) {
-        return true
-    }
-
-    return false
-}
-
-// This method will respawn another piece at the top
-function respawnPiece() {
-    clearTimeout(timer);
-
-    currentPiece.forEach((cp) => {
-        cp.removeAttribute('class');
-        cp.classList.add('tetromino-fixed');
-    })
-    
-    y = 3;
-    x = parseInt(tableWidth / 2);
-
-    var r = Math.floor(Math.random() * 6);
-
-    movePiece(r);
-}
-
-// DRAW
-
-// This method will draw a piece
-function draw(cells) {
-    cells.forEach((cell) => {
-        cell.classList.add('tetromino');
-    })
-}
-
-// This method will create a piece (we need to return some random piece)
-function createPiece(r) {
-
-    var p = r;
-
-    const tPiece = [
-        [lines[y].cells[x], lines[y].cells[x + 1], lines[y].cells[x - 1], lines[y + 1].cells[x]],
-        [lines[y].cells[x], lines[y - 1].cells[x], lines[y + 1].cells[x], lines[y].cells[x - 1]],
-        [lines[y].cells[x], lines[y].cells[x + 1], lines[y].cells[x - 1], lines[y - 1].cells[x]],
-        [lines[y].cells[x], lines[y - 1].cells[x], lines[y + 1].cells[x], lines[y].cells[x + 1]],
+    //The Tetrominoes
+    const lTetromino = [
+        [1, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1, 2],
+        [GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH * 2 + 2],
+        [1, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1, GRID_WIDTH * 2],
+        [GRID_WIDTH, GRID_WIDTH * 2, GRID_WIDTH * 2 + 1, GRID_WIDTH * 2 + 2]
     ]
 
-    const uPiece = [
-        [lines[y].cells[x], lines[y].cells[x + 1], lines[y + 1].cells[x + 1], lines[y].cells[x - 1], lines[y + 1].cells[x - 1]],
-        [lines[y].cells[x], lines[y - 1].cells[x], lines[y - 1].cells[x - 1], lines[y + 1].cells[x], lines[y + 1].cells[x - 1]],
-        [lines[y].cells[x], lines[y].cells[x + 1], lines[y - 1].cells[x + 1], lines[y].cells[x - 1], lines[y - 1].cells[x - 1]],
-        [lines[y].cells[x], lines[y + 1].cells[x], lines[y + 1].cells[x + 1], lines[y - 1].cells[x], lines[y - 1].cells[x + 1]],
+    const zTetromino = [
+        [0, GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1],
+        [GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH * 2, GRID_WIDTH * 2 + 1],
+        [0, GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1],
+        [GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH * 2, GRID_WIDTH * 2 + 1]
     ]
 
-    const lPiece = [
-        [lines[y].cells[x], lines[y + 1].cells[x], lines[y + 2].cells[x], lines[y + 2].cells[x + 1]],
-        [lines[y].cells[x], lines[y].cells[x - 1], lines[y].cells[x - 2], lines[y + 1].cells[x - 2]],
-        [lines[y].cells[x], lines[y - 1].cells[x], lines[y - 2].cells[x], lines[y - 2].cells[x - 1]],
-        [lines[y].cells[x], lines[y].cells[x + 1], lines[y].cells[x + 2], lines[y - 1].cells[x + 2]],
+    const tTetromino = [
+        [1, GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH + 2],
+        [1, GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH * 2 + 1],
+        [GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH * 2 + 1],
+        [1, GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1]
     ]
 
-    const jPiece = [
-        [lines[y].cells[x], lines[y + 1].cells[x], lines[y + 2].cells[x], lines[y + 2].cells[x - 1]],
-        [lines[y].cells[x], lines[y].cells[x - 1], lines[y].cells[x - 2], lines[y - 1].cells[x - 2]],
-        [lines[y].cells[x], lines[y - 1].cells[x], lines[y - 2].cells[x], lines[y - 2].cells[x + 1]],
-        [lines[y].cells[x], lines[y].cells[x - 1], lines[y].cells[x + 1], lines[y + 1].cells[x + 1]],
+    const oTetromino = [
+        [0, 1, GRID_WIDTH, GRID_WIDTH + 1],
+        [0, 1, GRID_WIDTH, GRID_WIDTH + 1],
+        [0, 1, GRID_WIDTH, GRID_WIDTH + 1],
+        [0, 1, GRID_WIDTH, GRID_WIDTH + 1]
     ]
 
-    const oPiece = [
-        [lines[y].cells[x], lines[y + 1].cells[x], lines[y].cells[x - 1], lines[y + 1].cells[x - 1]],
-        [lines[y].cells[x], lines[y + 1].cells[x], lines[y].cells[x - 1], lines[y + 1].cells[x - 1]],
-        [lines[y].cells[x], lines[y + 1].cells[x], lines[y].cells[x - 1], lines[y + 1].cells[x - 1]],
-        [lines[y].cells[x], lines[y + 1].cells[x], lines[y].cells[x - 1], lines[y + 1].cells[x - 1]],
+    const iTetromino = [
+        [1, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1, GRID_WIDTH * 3 + 1],
+        [GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH + 3],
+        [1, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1, GRID_WIDTH * 3 + 1],
+        [GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH + 3]
     ]
 
-    const iPiece = [
-        [lines[y].cells[x], lines[y + 1].cells[x], lines[y + 2].cells[x], lines[y + 3].cells[x]],
-        [lines[y].cells[x], lines[y].cells[x - 1], lines[y].cells[x - 2], lines[y].cells[x - 3]],
-        [lines[y].cells[x], lines[y - 1].cells[x], lines[y - 2].cells[x], lines[y - 3].cells[x]],
-        [lines[y].cells[x], lines[y].cells[x + 1], lines[y].cells[x + 2], lines[y].cells[x + 3]],
-    ]
+    const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
+
+    //Randomly Select Tetromino
+    let random = Math.floor(Math.random() * theTetrominoes.length)
+    let current = theTetrominoes[random][currentRotation]
 
 
-    const tetrominos = [tPiece[1], uPiece[1], lPiece[1], jPiece[1], oPiece[1], iPiece[1]];
-
-    return tetrominos[p];
-
-}
-
-// This method will delete the tracks when the piece is moving
-function deletePieceTracks() {
-    piece = document.querySelectorAll(".container .game-container table tr .tetromino");
-    if (piece != null) {
-        piece.forEach((p) => {
-            p.removeAttribute('class');
+    //move the Tetromino moveDown
+    let currentPosition = 4
+    //draw the shape
+    function draw() {
+        current.forEach(index => {
+            squares[currentPosition + index].classList.add('block')
+            // squares[currentPosition + index].style.backgroundImage = colors[random]
         })
     }
-}
 
-// Detecting arrow key presses
-document.addEventListener('keydown', function(e) {
+    //undraw the shape
+    function undraw() {
+        current.forEach(index => {
+            squares[currentPosition + index].classList.remove('block')
+            // squares[currentPosition + index].style.backgroundImage = 'none'
+        })
+    }
 
-        switch (e.keyCode) {
-            case 37: 
-                moveTo('left')
-                break;
-            case 39: // Move piece to right
-                moveTo('right')
-                break;
+    //move down on loop
+    function moveDown() {
+        undraw()
+        currentPosition = currentPosition += width
+        draw()
+        freeze()
+    }
+
+    startBtn.addEventListener('click', () => {
+        if (timerId) {
+            clearInterval(timerId)
+            timerId = null
+        } else {
+            draw()
+            timerId = setInterval(moveDown, 1000)
+            nextRandom = Math.floor(Math.random() * theTetrominoes.length)
+            displayShape()
         }
-});
+    })
+
+    //move left and prevent collisions with shapes moving left
+    function moveright() {
+        undraw()
+        const isAtRightEdge = current.some(index => (currentPosition + index) % width === width - 1)
+        if (!isAtRightEdge) currentPosition += 1
+        if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
+            currentPosition -= 1
+        }
+        draw()
+    }
+
+    //move right and prevent collisions with shapes moving right
+    function moveleft() {
+        undraw()
+        const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0)
+        if (!isAtLeftEdge) currentPosition -= 1
+        if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
+            currentPosition += 1
+        }
+        draw()
+    }
+
+    //freeze the shape
+    function freeze() {
+        // if block has settled
+        if (current.some(index => squares[currentPosition + index + width].classList.contains('block3') || squares[currentPosition + index + width].classList.contains('block2'))) {
+            // make it block2
+            current.forEach(index => squares[index + currentPosition].classList.add('block2'))
+            // start a new tetromino falling
+            random = nextRandom
+            nextRandom = Math.floor(Math.random() * theTetrominoes.length)
+            current = theTetrominoes[random][currentRotation]
+            currentPosition = 4
+            draw()
+            displayShape()
+            addScore()
+            gameOver()
+        }
+    }
+    freeze()
+
+    //Rotate the Tetromino
+    function rotate() {
+        undraw()
+        currentRotation++
+        if (currentRotation === current.length) {
+            currentRotation = 0
+        }
+        current = theTetrominoes[random][currentRotation]
+        draw()
+    }
+
+    //Game Over
+    function gameOver() {
+        if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
+            scoreDisplay.innerHTML = 'end'
+            clearInterval(timerId)
+        }
+    }
+
+    //show previous tetromino in scoreDisplay
+    const displayWidth = 4
+    const displaySquares = document.querySelectorAll('.previous-grid div')
+    let displayIndex = 0
+
+    const smallTetrominoes = [
+        [1, displayWidth + 1, displayWidth * 2 + 1, 2], /* lTetromino */
+        [0, displayWidth, displayWidth + 1, displayWidth * 2 + 1], /* zTetromino */
+        [1, displayWidth, displayWidth + 1, displayWidth + 2], /* tTetromino */
+        [0, 1, displayWidth, displayWidth + 1], /* oTetromino */
+        [1, displayWidth + 1, displayWidth * 2 + 1, displayWidth * 3 + 1] /* iTetromino */
+    ]
+
+    function displayShape() {
+        displaySquares.forEach(square => {
+            square.classList.remove('block')
+            // square.style.backgroundImage = 'none'
+        })
+        smallTetrominoes[nextRandom].forEach(index => {
+            displaySquares[displayIndex + index].classList.add('block')
+            // displaySquares[displayIndex + index].style.backgroundImage = colors[nextRandom]
+        })
+    }
+
+    //Add score
+    function addScore() {
+        for (currentIndex = 0; currentIndex < GRID_SIZE; currentIndex += GRID_WIDTH) {
+            const row = [currentIndex, currentIndex + 1, currentIndex + 2, currentIndex + 3, currentIndex + 4, currentIndex + 5, currentIndex + 6, currentIndex + 7, currentIndex + 8, currentIndex + 9]
+            if (row.every(index => squares[index].classList.contains('block2'))) {
+                score += 10
+                lines += 1
+                scoreDisplay.innerHTML = score
+                linesDisplay.innerHTML = lines
+                row.forEach(index => {
+                    squares[index].style.backgroundImage = 'none'
+                    squares[index].classList.remove('block2') || squares[index].classList.remove('block')
+
+                })
+                //splice array
+                const squaresRemoved = squares.splice(currentIndex, width)
+                squares = squaresRemoved.concat(squares)
+                squares.forEach(cell => grid.appendChild(cell))
+            }
+        }
+    }
+
+    //Styling eventListeners
+    hamburgerBtn.addEventListener('click', () => {
+        menu.style.display = 'flex'
+    })
+    span.addEventListener('click', () => {
+        menu.style.display = 'none'
+    })
+
+})

@@ -510,3 +510,21 @@ input {
     padding-right: 12px;
     height: 32px;
 }
+
+
+
+
+/* REFACTOR  */ 
+
+.block3 {
+    height: 2rem;
+    width: 2rem;
+  }
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 20rem;
+    height: 40rem;
+}
