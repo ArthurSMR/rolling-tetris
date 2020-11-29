@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // no need to type 200 divs :)
     const grid = createGrid();
     let squares = Array.from(grid.querySelectorAll('div'))
-    const startBtn = document.querySelector('.button')
+    const startBtn = document.getElementById("btn-table-picker")
     const hamburgerBtn = document.querySelector('.toggler')
     const menu = document.querySelector('.menu')
     const span = document.getElementsByClassName('close')[0]
@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let grid = document.querySelector(".grid")
         for (let i = 0; i < GRID_SIZE; i++) {
             let gridElement = document.createElement("div")
+            gridElement.setAttribute("class", "main-grid")
             grid.appendChild(gridElement)
         }
 
@@ -45,17 +46,16 @@ document.addEventListener('DOMContentLoaded', () => {
             grid.appendChild(gridElement)
         }
 
-        let previousGrid = document.querySelector(".previous-grid")
-        // Since 16 is the max grid size in which all the Tetrominoes 
-        // can fit in we create one here
-        for (let i = 0; i < 16; i++) {
-            let gridElement = document.createElement("div")
-            previousGrid.appendChild(gridElement);
-        }
+        // let previousGrid = document.querySelector(".previous-grid")
+        // // Since 16 is the max grid size in which all the Tetrominoes 
+        // // can fit in we create one here
+        // for (let i = 0; i < 16; i++) {
+        //     let gridElement = document.createElement("div")
+        //     previousGrid.appendChild(gridElement);
+        // }
         return grid;
     }
-
-
+    
     //assign functions to keycodes
     function control(e) {
         if (e.keyCode === 39)
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //draw the shape
     function draw() {
         current.forEach(index => {
-            squares[currentPosition + index].classList.add('block')
+            squares[currentPosition + index].setAttribute("class", "block")
             // squares[currentPosition + index].style.backgroundImage = colors[random]
         })
     }
@@ -140,17 +140,17 @@ document.addEventListener('DOMContentLoaded', () => {
         freeze()
     }
 
-    startBtn.addEventListener('click', () => {
-        if (timerId) {
-            clearInterval(timerId)
-            timerId = null
-        } else {
-            draw()
-            timerId = setInterval(moveDown, 1000)
-            nextRandom = Math.floor(Math.random() * theTetrominoes.length)
-            displayShape()
-        }
-    })
+    // startBtn.addEventListener('click', () => {
+    //     if (timerId) {
+    //         clearInterval(timerId)
+    //         timerId = null
+    //     } else {
+    //         draw()
+    //         timerId = setInterval(moveDown, 1000)
+    //         nextRandom = Math.floor(Math.random() * theTetrominoes.length)
+    //         // displayShape()
+    //     }
+    // })
 
     //move left and prevent collisions with shapes moving left
     function moveright() {
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
             current = theTetrominoes[random][currentRotation]
             currentPosition = 4
             draw()
-            displayShape()
+            // displayShape()
             addScore()
             gameOver()
         }
@@ -225,16 +225,16 @@ document.addEventListener('DOMContentLoaded', () => {
         [1, displayWidth + 1, displayWidth * 2 + 1, displayWidth * 3 + 1] /* iTetromino */
     ]
 
-    function displayShape() {
-        displaySquares.forEach(square => {
-            square.classList.remove('block')
-            // square.style.backgroundImage = 'none'
-        })
-        smallTetrominoes[nextRandom].forEach(index => {
-            displaySquares[displayIndex + index].classList.add('block')
-            // displaySquares[displayIndex + index].style.backgroundImage = colors[nextRandom]
-        })
-    }
+    // function displayShape() {
+    //     displaySquares.forEach(square => {
+    //         square.classList.remove('block')
+    //         // square.style.backgroundImage = 'none'
+    //     })
+    //     smallTetrominoes[nextRandom].forEach(index => {
+    //         displaySquares[displayIndex + index].classList.add('block')
+    //         // displaySquares[displayIndex + index].style.backgroundImage = colors[nextRandom]
+    //     })
+    // }
 
     //Add score
     function addScore() {
@@ -259,11 +259,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //Styling eventListeners
-    hamburgerBtn.addEventListener('click', () => {
-        menu.style.display = 'flex'
-    })
-    span.addEventListener('click', () => {
-        menu.style.display = 'none'
-    })
+    // hamburgerBtn.addEventListener('click', () => {
+    //     menu.style.display = 'flex'
+    // })
+    // span.addEventListener('click', () => {
+    //     menu.style.display = 'none'
+    // })
 
 })

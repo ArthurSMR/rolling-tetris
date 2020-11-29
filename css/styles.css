@@ -511,20 +511,33 @@ input {
     height: 32px;
 }
 
-
-
-
 /* REFACTOR  */ 
 
-.block3 {
-    height: 2rem;
-    width: 2rem;
-  }
+div.main-grid {
+    background-color: yellow;
+    height: 20px;
+    width: 20px;
+}
 
 .grid {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    width: 20rem;
-    height: 40rem;
+    width: 200px;
+    height: 400px;
 }
+
+.block {
+    background-color: blue;
+}
+
+.block2 {
+    background-color: purple;
+}
+
+.block3 {
+    height: 20px;
+    width: 20px;
+    background-color: green;
+}
+
