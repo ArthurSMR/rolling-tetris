@@ -515,6 +515,9 @@ input {
 
 div.main-grid {
     background-color: yellow;
+}
+
+.main-grid, .block, .block2 {
     height: 20px;
     width: 20px;
 }

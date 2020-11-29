@@ -21,15 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let timerId
     let nextRandom = 0
 
-    // const colors = [
-    //     'url(images/blue_block.png)',
-    //     'url(images/pink_block.png)',
-    //     'url(images/purple_block.png)',
-    //     'url(images/peach_block.png)',
-    //     'url(images/yellow_block.png)'
-    // ]
-
-
     function createGrid() {
         // the main grid
         let grid = document.querySelector(".grid")
@@ -46,13 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
             grid.appendChild(gridElement)
         }
 
-        // let previousGrid = document.querySelector(".previous-grid")
-        // // Since 16 is the max grid size in which all the Tetrominoes 
-        // // can fit in we create one here
-        // for (let i = 0; i < 16; i++) {
-        //     let gridElement = document.createElement("div")
-        //     previousGrid.appendChild(gridElement);
-        // }
         return grid;
     }
     
@@ -119,16 +103,14 @@ document.addEventListener('DOMContentLoaded', () => {
     //draw the shape
     function draw() {
         current.forEach(index => {
-            squares[currentPosition + index].setAttribute("class", "block")
-            // squares[currentPosition + index].style.backgroundImage = colors[random]
+            squares[currentPosition + index].classList.replace("main-grid", "block")
         })
     }
 
     //undraw the shape
     function undraw() {
         current.forEach(index => {
-            squares[currentPosition + index].classList.remove('block')
-            // squares[currentPosition + index].style.backgroundImage = 'none'
+            squares[currentPosition + index].classList.replace('block', 'main-grid')
         })
     }
 
@@ -140,17 +122,17 @@ document.addEventListener('DOMContentLoaded', () => {
         freeze()
     }
 
-    // startBtn.addEventListener('click', () => {
-    //     if (timerId) {
-    //         clearInterval(timerId)
-    //         timerId = null
-    //     } else {
-    //         draw()
-    //         timerId = setInterval(moveDown, 1000)
-    //         nextRandom = Math.floor(Math.random() * theTetrominoes.length)
-    //         // displayShape()
-    //     }
-    // })
+    startBtn.addEventListener('click', () => {
+        if (timerId) {
+            clearInterval(timerId)
+            timerId = null
+        } else {
+            draw()
+            timerId = setInterval(moveDown, 1000)
+            nextRandom = Math.floor(Math.random() * theTetrominoes.length)
+            // displayShape()
+        }
+    })
 
     //move left and prevent collisions with shapes moving left
     function moveright() {
@@ -179,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // if block has settled
         if (current.some(index => squares[currentPosition + index + width].classList.contains('block3') || squares[currentPosition + index + width].classList.contains('block2'))) {
             // make it block2
-            current.forEach(index => squares[index + currentPosition].classList.add('block2'))
+            current.forEach(index => squares[index + currentPosition].classList.replace('block', 'block2'))
             // start a new tetromino falling
             random = nextRandom
             nextRandom = Math.floor(Math.random() * theTetrominoes.length)
@@ -207,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //Game Over
     function gameOver() {
         if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
-            scoreDisplay.innerHTML = 'end'
+            alert("sefu")
             clearInterval(timerId)
         }
     }
@@ -224,17 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
         [0, 1, displayWidth, displayWidth + 1], /* oTetromino */
         [1, displayWidth + 1, displayWidth * 2 + 1, displayWidth * 3 + 1] /* iTetromino */
     ]
-
-    // function displayShape() {
-    //     displaySquares.forEach(square => {
-    //         square.classList.remove('block')
-    //         // square.style.backgroundImage = 'none'
-    //     })
-    //     smallTetrominoes[nextRandom].forEach(index => {
-    //         displaySquares[displayIndex + index].classList.add('block')
-    //         // displaySquares[displayIndex + index].style.backgroundImage = colors[nextRandom]
-    //     })
-    // }
 
     //Add score
     function addScore() {
