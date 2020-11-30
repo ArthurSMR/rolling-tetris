@@ -6,6 +6,7 @@ tablePickerBtn.addEventListener('click', handleSubmit);
 var tableWidth = 0;
 var tableHeight = 0;
 var tableSize = 0;
+var speed = 1000;
 
 let grid;
 let squares;
@@ -55,8 +56,30 @@ function createGrid() {
     return grid;
 }
 
+function startGame(){
+    if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
+    } else {
+        disableScrollWithKeyboard()
+        draw();
+        timerId = setInterval(moveDown, speed);
+        nextRandom = Math.floor(Math.random() * theTetrominoes.length);               
+    }
+}
+
+function disableScrollWithKeyboard() {
+    window.addEventListener("keydown", function(e) {
+        // space and arrow keys
+        if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+            e.preventDefault();
+        }
+    }, false);
+}
+
 //assign functions to keycodes
 function control(e) {
+
     if (e.keyCode === 39)
         moveright()
     else if (e.keyCode === 38)
@@ -136,17 +159,6 @@ function moveDown() {
     freeze()
 }
 
-function startGame(){
-    if (timerId) {
-        clearInterval(timerId);
-        timerId = null;
-    } else {
-        draw();
-        timerId = setInterval(moveDown, 1000);
-        nextRandom = Math.floor(Math.random() * theTetrominoes.length);               
-    }
-}
-
 //move left and prevent collisions with shapes moving left
 function moveright() {
     undraw()
@@ -180,8 +192,17 @@ function freeze() {
         nextRandom = Math.floor(Math.random() * theTetrominoes.length)
         current = theTetrominoes[random][currentRotation]
         currentPosition = 4
+        increaseSpeed()
         draw()
         gameOver()
+    }
+}
+
+function increaseSpeed() {
+    if (speed > 200) {
+        clearInterval(timerId);
+        speed = speed - 25;
+        timerId = setInterval(moveDown, speed);
     }
 }
 
@@ -199,7 +220,7 @@ function rotate() {
 //Game Over
 function gameOver() {
     if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
-        alert("sefu")
+        alert("Você perdeu, sua pontuação foi de: ")
         clearInterval(timerId)
     }
 }
