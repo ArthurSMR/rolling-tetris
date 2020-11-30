@@ -1,0 +1,550 @@
+body {
+    font-family: 'Goldman', cursive;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #429ffc;
+}
+
+.header .title h2 {
+    color: #fff;
+    letter-spacing: 1px;
+    font-weight: 100;
+    margin: 0px;
+    padding-top: 25px;
+    padding-left: 25px;
+}
+
+header .header {
+    height: 75px;
+    border-bottom: 2px solid #FFF;
+}
+
+header .header .title {
+    width: 49%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+header .header .menu {
+    width: 50%;
+    display: inline-block;
+}
+
+header .header .menu ul {
+    float: right;
+    padding-right: 25px;
+    margin: 0px;
+}
+
+header .header .menu ul li {
+    display: inline-block;
+    padding: 0px 15px;
+    height: 50px;
+    padding-top: 25px;
+}
+
+header .header .menu ul li a {
+    color: #FFF;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+header .header .menu ul li:hover {
+    background-color: #FFF;
+    transition: 0.5s;
+}
+
+header .header .menu ul li:hover a {
+    color: #429ffc;
+}
+
+footer .footer {
+    height: 175px;
+    background-color: #000;
+}
+
+footer .coluna {
+    width: 24.5%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+footer .coluna .title h2 {
+    color: #fff;
+    letter-spacing: 1px;
+    font-weight: 100;
+    margin: 0px;
+    padding-top: 35px;
+    padding-left: 25px;
+}
+
+footer .footer .coluna .menu ul li {
+    padding: 5px 0px;
+}
+
+footer .footer .coluna .menu ul li a {
+    color: #FFF;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+footer .footer .coluna .menu ul li a:hover {
+    text-decoration: underline;
+}
+
+footer .footer .coluna .menu ul li a:active {
+    color: #FFF;
+}
+
+footer .footer .coluna .menu {
+    padding-top: 15px;
+}
+
+footer .footer .coluna .alunos {
+    padding-top: 15px;
+}
+
+footer .footer .coluna .alunos ul li {
+    color: #FFF;
+    padding: 5px 0px;
+}
+
+footer .pagina-pequena {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+footer .footer .coluna .livre ul li {
+    color: #FFF;
+}
+
+
+/* Página Logado */
+
+.conteudo .pagina-logado {
+    margin: 0% 35%;
+    background-color: #fff;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    margin-top: 50px;
+}
+
+.conteudo .pagina-logado ul li {
+    list-style: none;
+    width: 100%;
+    border: 2px solid #429ffc;
+    border-radius: 5px;
+    padding: 10px 0px;
+    margin: 10px 0px;
+    text-align: center;
+}
+
+.conteudo .pagina-logado ul li:hover {
+    background-color: #429ffc;
+    transition: 0.5s;
+}
+
+.conteudo .pagina-logado ul li a {
+    color: #429ffc;
+    text-decoration: none;
+}
+
+.conteudo .pagina-logado ul li:hover a {
+    color: #FFF;
+}
+
+.conteudo .pagina-logado ul {
+    margin: 5% 25%;
+    padding-inline-start: 0px !important;
+}
+
+.conteudo .pagina-logado .title h2 {
+    text-align: center;
+    color: #429ffc;
+    letter-spacing: 2px;
+}
+
+
+/* Página Jogo */
+
+.container,
+.game-container,
+.game-stats,
+.wrapper,
+.actions {
+    display: flex;
+    justify-items: center;
+}
+
+.container .content {
+    width: 30%;
+    color: white;
+    margin-top: 0.4rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.container .content .game-stats {
+    padding: 8px;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container .content .game-stats .wrapper {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#time {
+    font-size: 24px;
+    padding-bottom: 8px;
+}
+
+.container .content .game-stats .wrapper .values {
+    text-align: right;
+}
+
+.container .game-container table {
+    border: 2px solid #1042c7;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.container .game-container tr {
+    border: none;
+    height: 30px;
+}
+
+.container .game-container td {
+    background-color: #000;
+    border: none;
+    width: 30px;
+}
+
+.container .game-container .tetromino {
+    background-color: red;
+}
+
+.container .game-container .tetromino-fixed {
+    background-color: green;
+}
+
+.container .content .game-stats .actions {
+    padding-top: 100%;
+    width: 100%;
+    padding-bottom: 0.8rem;
+    justify-content: space-between;
+}
+
+#btn-primary,
+#btn-secondary {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+#btn-primary {
+    background-color: #2663FF;
+    color: white;
+}
+
+#btn-primary:hover {
+    background-color: #1042c7;
+}
+
+#btn-secondary {
+    background-color: white;
+    color: #2663FF;
+    border: 2px solid #2663FF;
+}
+
+#btn-secondary:hover {
+    background-color: #c1c8d9;
+}
+
+
+/**** 
+    historico.html 
+****/
+
+.container .content .top {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.4rem;
+}
+
+.container .content .ranking-table {
+    background-color: white;
+    color: #429FFC;
+    margin-top: 1.2rem;
+    margin-bottom: 0.8rem;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.container .content .ranking-table thead tr th {
+    padding: 8px;
+    border-bottom: 2px solid #429FFC;
+}
+
+.container .content .ranking-table td {
+    padding: 4px;
+    border-bottom: 1px solid #429FFC;
+}
+
+
+/* Histórico de partidas do usuário */
+
+.history-content {
+    background-color: white;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    padding-left: 0%;
+    padding-right: 0%;
+    padding-top: 0%;
+    padding-bottom: 3%;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.table-history {
+    border-collapse: collapse;
+    border: solid rgb(38, 99, 255) 1px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table-history th,
+td {
+    border: solid rgb(38, 99, 255) 1px;
+    text-align: center;
+    vertical-align: middle;
+    width: 20%;
+}
+
+.table-history th {
+    background-color: rgb(38, 99, 255);
+    color: #fff;
+    font-size: 20px;
+    letter-spacing: 3px;
+}
+
+.table-history td {
+    height: 8px;
+    font-weight: normal;
+}
+
+.table-history tr:nth-child(odd) {
+    background-color: rgb(146, 177, 255);
+}
+
+
+/* Login */
+
+.h1-login {
+    margin-top: 0px;
+    padding-left: 16px;
+}
+
+.h2-login {
+    color: rgb(66, 159, 252);
+    text-align: left;
+    padding-left: 19%;
+    padding-top: 15%;
+}
+
+.login-label {
+    color: rgb(66, 159, 252);
+    text-align: left;
+    padding-left: 19%;
+    padding-top: 15%;
+}
+
+.corpo-login {
+    background-color: white;
+    width: 25%;
+    margin-left: 35%;
+    margin-right: 0%;
+    margin-top: 5%;
+    padding-left: 0%;
+    padding-right: 0%;
+    padding-top: 0%;
+    padding-bottom: 3%;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.input-login {
+    padding-left: 1%;
+    height: 32px;
+    width: 60%;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border-style: solid;
+    border-color: rgb(66, 159, 252);
+}
+
+button.entrar {
+    background-color: rgb(38, 99, 255);
+    border-radius: 8px;
+    height: 32px;
+    color: white;
+    width: 60%;
+    margin-bottom: 16px;
+    cursor: pointer;
+    border: none;
+}
+
+button.cadastro {
+    color: rgb(139, 139, 139);
+    font-size: 10px;
+    background: none;
+    border: none;
+    width: 60%;
+    margin-bottom: 16px;
+    cursor: pointer;
+    border: none;
+}
+
+::placeholder {
+    color: rgb(196, 196, 196);
+}
+
+
+/* Cadastro */
+
+.corpo-cadastro,
+.info_direita,
+.info_esquerda {
+    margin-top: 3%;
+    width: 100%;
+    float: left;
+    color: rgb(66, 159, 252);
+}
+
+.info_esquerda {
+    margin-left: 30%;
+    padding-left: 2%;
+    background-color: white;
+    width: 20%;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    padding-bottom: 1%;
+}
+
+.info_direita {
+    background-color: white;
+    width: 20%;
+    padding-top: 3.3%;
+    padding-bottom: 0.85%;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+input {
+    padding-left: 1%;
+    height: 32px;
+    width: 60%;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border-style: solid;
+    border-color: rgb(66, 159, 252);
+}
+
+.cancelar {
+    margin-top: 10%;
+    margin-bottom: 16px;
+    background: none;
+    border-color: rgb(38, 99, 255);
+    color: rgb(38, 99, 255);
+    width: 90%;
+    cursor: pointer;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.cadastrar {
+    margin-top: 50%;
+    margin-bottom: 16px;
+    border: none;
+    background-color: rgb(38, 99, 255);
+    color: white;
+    width: 90%;
+    cursor: pointer;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.table-picker {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #429FFC;
+    align-items: center;
+    position: absolute;
+}
+
+.table-picker p {
+    font-size: 22px;
+    color: white;
+}
+
+.table-picker #btn-table-picker {
+    border: none;
+    margin-top: 20px;
+    color: #1042c7;
+    border-radius: 8px;
+    cursor: pointer;
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 32px;
+}
+
+/* REFACTOR  */ 
+
+div.main-grid {
+    background-color: yellow;
+}
+
+.main-grid, .block, .block2 {
+    height: 20px;
+    width: 20px;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 200px;
+    height: 400px;
+}
+
+.block {
+    background-color: blue;
+}
+
+.block2 {
+    background-color: purple;
+}
+
+.block3 {
+    height: 20px;
+    width: 20px;
+    background-color: green;
+}
+
+.block4 {
+    background-color: red;
+}
+
