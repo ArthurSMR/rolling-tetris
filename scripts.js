@@ -11,7 +11,7 @@ var speed = 1000;
 let grid;
 let squares;
 
-let ci = 0
+let currentIndex = 0
 let currentRotation = 0
 let score = 0
 let lines = 0
@@ -19,9 +19,6 @@ let timerId
 let nextRandom = 0
 
 let x = 10;
-
-const scoreDisplay = document.querySelector('.score');
-const linesDisplay = document.querySelector('.lines');
 
 function handleSubmit(event) {
     event.preventDefault();
@@ -132,14 +129,7 @@ const iTetromino = [
     [10, 10 + 1, 10 + 2, 10 + 3]
 ]
 
-const specialTetromino = [
-    [0, 1, 10, 10 + 1],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0]
-]
-
-const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino, specialTetromino]
+const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
 //Randomly Select Tetromino
 let random = Math.floor(Math.random() * theTetrominoes.length)
@@ -204,13 +194,50 @@ function freeze() {
         currentPosition = 4
         increaseSpeed()
         draw()
-        gameOver()
         addScore()
+        gameOver()
+    }
+}
+
+//Score
+function addScore() {
+	//ARRUMAR WIDTH HEIGHT
+	var linesmult = 0;
+    for(ci = 0; ci < 220; ci += 10){
+        const row = [ci, ci+1, ci+2, ci+3, ci+4, ci+5, ci+6, ci+7, ci+8, ci+9];
+
+        if(row.every(index => squares[index].classList.contains('block2'))){
+            lines += 1
+    		linesmult += 1
+            linesDisplay.innerHTML = lines
+            row.forEach(index => {
+                squares[index].classList.replace('block2','main-grid') || squares[index].classList.replace('block','main-grid')
+            })
+            const squaresRemoved = squares.splice(ci, 10)
+            squares = squaresRemoved.concat(squares)
+            squares.forEach(cell => grid.appendChild(cell))
+        }
+    }
+
+    if(linesmult > 0){
+    	var scorecount = (linesmult * 10)*linesmult
+    	score = score + scorecount
+    	scoreDisplay.innerHTML = score
+	}
+}
+
+function specialBlock(){
+	for(ci = 0; ci < 220; ci += 10){
+        const row = [ci, ci+1, ci+2, ci+3, ci+4, ci+5, ci+6, ci+7, ci+8, ci+9];
+
+        if(row.some(index => squares[index].classList.contains('specialblock'))){
+        	alert('Bloco Special');
+        }
     }
 }
 
 function increaseSpeed() {
-    if (speed > 100) {
+    if (speed > 200) {
         clearInterval(timerId);
         speed = speed - 25;
         timerId = setInterval(moveDown, speed);
@@ -233,47 +260,5 @@ function gameOver() {
     if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
         alert("Você perdeu, sua pontuação foi de: ")
         clearInterval(timerId)
-    }
-}
-
-//Score
-function addScore() {
-	//ARRUMAR WIDTH HEIGHT
-	var linesmult = 0;
-    for(ci = 0; ci < 220; ci += 10){
-        const row = [ci, ci+1, ci+2, ci+3, ci+4, ci+5, ci+6, ci+7, ci+8, ci+9];
-
-        if(row.every(index => squares[index].classList.contains('block2'))){
-            lines += 1
-    		linesmult += 1
-            linesDisplay.innerHTML = lines
-            row.forEach(index => {
-                squares[index].classList.replace('block2','main-grid') || squares[index].classList.replace('block','main-grid')
-            })
-            const squaresRemoved = squares.splice(ci, 10)
-            squares = squaresRemoved.concat(squares)
-            squares.forEach(cell => grid.appendChild(cell))
-        }
-
-
-    }
-
-    if(linesmult > 0){
-    	var scorecount = (linesmult * 10)*linesmult
-    	score = score + scorecount
-    	scoreDisplay.innerHTML = score
-	}
-
-}
-
-function specialBlock(){
-	for(ci = 0; ci < 220; ci += 10){
-        const row = [ci, ci+1, ci+2, ci+3, ci+4, ci+5, ci+6, ci+7, ci+8, ci+9];
-
-        if(row.some(index => squares[index].classList.contains('specialblock'))){
-        	alert('Bloco Special');
-        }
-
-
     }
 }
