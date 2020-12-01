@@ -7,6 +7,7 @@ var tableWidth = 0;
 var tableHeight = 0;
 var tableSize = 0;
 var speed = 1000;
+var isReversed = false;
 
 let grid;
 let squares;
@@ -19,6 +20,9 @@ let timerId
 let nextRandom = 0
 
 let x = 10;
+
+const scoreDisplay = document.querySelector('.score');
+const linesDisplay = document.querySelector('.lines');
 
 function handleSubmit(event) {
     event.preventDefault();
@@ -129,7 +133,21 @@ const iTetromino = [
     [10, 10 + 1, 10 + 2, 10 + 3]
 ]
 
-const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
+// const specialTetromino = [
+//     [0, 0, 0, 0],
+//     [0, 0, 0, 0],
+//     [0, 0, 0, 0],
+//     [0, 0, 0, 0]
+// ]
+const specialTetromino = [
+    [0, 1, 10, 10 + 1],
+    [0, 1, 10, 10 + 1],
+    [0, 1, 10, 10 + 1],
+    [0, 1, 10, 10 + 1]
+]
+
+// const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino, specialTetromino]
+const theTetrominoes = [specialTetromino]
 
 //Randomly Select Tetromino
 let random = Math.floor(Math.random() * theTetrominoes.length)
@@ -139,16 +157,30 @@ let current = theTetrominoes[random][currentRotation]
 let currentPosition = 4
 //draw the shape
 function draw() {
-    current.forEach(index => {
-        squares[currentPosition + index].classList.replace("main-grid", "block")
-    })
+
+    if (isSpecialBlock()) {
+        current.forEach(index => {
+            squares[currentPosition + index].classList.replace("main-grid", "specialblock")
+        })
+    } else {
+        current.forEach(index => {
+            squares[currentPosition + index].classList.replace("main-grid", "block")
+        })
+    }
 }
 
 //undraw the shape
 function undraw() {
-    current.forEach(index => {
-        squares[currentPosition + index].classList.replace('block', 'main-grid')
-    })
+
+    if (isSpecialBlock()) {
+        current.forEach(index => {
+            squares[currentPosition + index].classList.replace('specialblock', 'main-grid')
+        })
+    } else {
+        current.forEach(index => {
+            squares[currentPosition + index].classList.replace('block', 'main-grid')
+        })
+    }
 }
 
 //move down on loop
@@ -186,7 +218,12 @@ function freeze() {
     // if block has settled
     if (current.some(index => squares[currentPosition + index + x].classList.contains('block3') || squares[currentPosition + index + x].classList.contains('block2'))) {
         // make it block2
-        current.forEach(index => squares[index + currentPosition].classList.replace('block', 'block2'))
+
+        if (isSpecialBlock()) {
+            current.forEach(index => squares[index + currentPosition].classList.replace('specialblock', 'block2'))
+        } else {
+            current.forEach(index => squares[index + currentPosition].classList.replace('block', 'block2'))
+        }
         // start a new tetromino falling
         random = nextRandom
         nextRandom = Math.floor(Math.random() * theTetrominoes.length)
@@ -195,13 +232,13 @@ function freeze() {
         increaseSpeed()
         draw()
         addScore()
-        gameOver()
+        //gameOver()
     }
 }
 
 //Score
 function addScore() {
-	//ARRUMAR WIDTH HEIGHT
+	
 	var linesmult = 0;
     for(ci = 0; ci < 220; ci += 10){
         const row = [ci, ci+1, ci+2, ci+3, ci+4, ci+5, ci+6, ci+7, ci+8, ci+9];
@@ -216,6 +253,10 @@ function addScore() {
             const squaresRemoved = squares.splice(ci, 10)
             squares = squaresRemoved.concat(squares)
             squares.forEach(cell => grid.appendChild(cell))
+
+            if (isSpecialBlock()) {
+                rotateBoard()
+            }
         }
     }
 
@@ -226,14 +267,17 @@ function addScore() {
 	}
 }
 
-function specialBlock(){
-	for(ci = 0; ci < 220; ci += 10){
-        const row = [ci, ci+1, ci+2, ci+3, ci+4, ci+5, ci+6, ci+7, ci+8, ci+9];
+function rotateBoard() {
+    isReversed = !isReversed
+    squares.reverse()
+}
 
-        if(row.some(index => squares[index].classList.contains('specialblock'))){
-        	alert('Bloco Special');
-        }
+function isSpecialBlock(){
+
+    if (current == specialTetromino[currentRotation]) {
+        return true
     }
+    return false
 }
 
 function increaseSpeed() {
