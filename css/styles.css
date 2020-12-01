@@ -514,7 +514,7 @@ input {
 /* REFACTOR  */ 
 
 div.main-grid {
-    background-color: yellow;
+    background-color: #dcdcdc;
 }
 
 .main-grid, .block, .block2, .specialblock {
@@ -531,20 +531,20 @@ div.main-grid {
 }
 
 .block {
-    background-color: blue;
+    background-color: rgb(41, 41, 255);
 }
 
 .block2 {
-    background-color: purple;
+    background-color: rgb(0, 0, 124);
 }
 
 .block3 {
     height: 20px;
     width: 20px;
-    background-color: green;
+    background-color: black;
 }
 
 .specialblock {
-    background-color: red;
+    background-color: rgb(194, 34, 34);
 }
 
