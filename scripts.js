@@ -251,7 +251,7 @@ function freeze() {
         increaseSpeed()
         draw()
         addScore()
-        //gameOver()
+        // gameOver()
     }
 }
 
@@ -289,6 +289,21 @@ function addScore() {
 function rotateBoard() {
     isReversed = !isReversed
     squares.reverse()
+    grid.remove();
+    grid = drawReversedGrid()
+}
+
+function drawReversedGrid() {
+
+    let grid = document.createElement("div")
+    grid.setAttribute("class", "grid")
+
+    for (let i = 0; i < squares.lenght; i++) {
+        let gridElement = document.createElement("div")
+        gridElement.setAttribute("class", squares[i].classList.value)
+        grid.appendChild(gridElement)
+    }
+    return grid;
 }
 
 function isSpecialBlock(){
