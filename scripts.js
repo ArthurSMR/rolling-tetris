@@ -33,7 +33,7 @@ function handleSubmit(event) {
         if (tableHeight >= 22 && tableHeight <= 44) {
             tableSize = tableHeight * tableWidth;
             grid = createGrid();
-            squares = Array.from(grid.querySelectorAll('div'));     
+            squares = Array.from(grid.querySelectorAll('div'));
             tablePicker.remove();
             startGame();
         }
@@ -59,7 +59,7 @@ function createGrid() {
     return grid;
 }
 
-function startGame(){
+function startGame() {
     if (timerId) {
         clearInterval(timerId);
         timerId = null;
@@ -67,14 +67,14 @@ function startGame(){
         disableScrollWithKeyboard()
         draw();
         timerId = setInterval(moveDown, speed);
-        nextRandom = Math.floor(Math.random() * theTetrominoes.length);               
+        nextRandom = Math.floor(Math.random() * theTetrominoes.length);
     }
 }
 
 function disableScrollWithKeyboard() {
     window.addEventListener("keydown", function(e) {
         // space and arrow keys
-        if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
             e.preventDefault();
         }
     }, false);
@@ -97,40 +97,41 @@ function control(e) {
 document.addEventListener('keydown', control)
 
 //The Tetrominoes
-const lTetromino = [
-    [1, 10 + 1, 10 * 2 + 1, 2],
-    [10, 10 + 1, 10 + 2, 10 * 2 + 2],
-    [1, 10 + 1, 10 * 2 + 1, 10 * 2],
-    [10, 10 * 2, 10 * 2 + 1, 10 * 2 + 2]
-]
-
-const zTetromino = [
-    [0, 10, 10 + 1, 10 * 2 + 1],
-    [10 + 1, 10 + 2, 10 * 2, 10 * 2 + 1],
-    [0, 10, 10 + 1, 10 * 2 + 1],
-    [10 + 1, 10 + 2, 10 * 2, 10 * 2 + 1]
-]
-
-const tTetromino = [
-    [1, 10, 10 + 1, 10 + 2],
-    [1, 10 + 1, 10 + 2, 10 * 2 + 1],
-    [10, 10 + 1, 10 + 2, 10 * 2 + 1],
-    [1, 10, 10 + 1, 10 * 2 + 1]
-]
 
 const oTetromino = [
     [0, 1, 10, 10 + 1],
     [0, 1, 10, 10 + 1],
     [0, 1, 10, 10 + 1],
     [0, 1, 10, 10 + 1]
-]
+];
 
 const iTetromino = [
     [1, 10 + 1, 10 * 2 + 1, 10 * 3 + 1],
     [10, 10 + 1, 10 + 2, 10 + 3],
     [1, 10 + 1, 10 * 2 + 1, 10 * 3 + 1],
     [10, 10 + 1, 10 + 2, 10 + 3]
+];
+
+const tTetromino = [
+    [1, 10, 10 + 1, 10 + 2],
+    [1, 10 + 1, 10 + 2, 10 * 2 + 1],
+    [10, 10 + 1, 10 + 2, 10 * 2 + 1],
+    [1, 10, 10 + 1, 10 * 2 + 1]
+];
+
+const uTetromino = [
+    [1, 10 + 1, 2, 3, 10 + 3],
+    [1, 2, 10 + 2, 10 * 2 + 2, 10 * 2 + 1],
+    [1, 10 + 1, 10 + 2, 10 + 3, 3],
+    [1, 2, 10 + 1, 10 * 2 + 1, 10 * 2 + 2]
 ]
+
+const jTetromino = [
+    [1, 10 + 1, 10 * 2 + 1, 10 * 2],
+    [10, 10 * 2, 10 * 2 + 1, 10 * 2 + 2],
+    [1, 10 + 1, 10 * 2 + 1, 2],
+    [10, 10 + 1, 10 + 2, 10 * 2 + 2],
+];
 
 const specialTetromino = [
     [0, 1, 10, 10 + 1],
@@ -139,18 +140,25 @@ const specialTetromino = [
     [0, 0, 0, 0]
 ]
 
-const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino, specialTetromino]
+const lTetromino = [
+    [1, 10 + 1, 10 * 2 + 1, 10 * 2 + 2],
+    [1, 10 + 1, 2, 3],
+    [2, 1, 10 + 2, 10 * 2 + 2],
+    [2, 10, 10 + 1, 10 + 2],
+]
+
+const theTetrominoes = [oTetromino, iTetromino, tTetromino, uTetromino, jTetromino, specialTetromino, lTetromino];
 
 //Randomly Select Tetromino
-let random = Math.floor(Math.random() * theTetrominoes.length)
-let current = theTetrominoes[random][currentRotation]
+let random = Math.floor(Math.random() * theTetrominoes.length);
+let current = theTetrominoes[random][currentRotation];
 
 //move the Tetromino moveDown
-let currentPosition = 4
+let currentPosition = 4;
 //draw the shape
 function draw() {
     current.forEach(index => {
-        squares[currentPosition + index].classList.replace("main-grid", "block")
+        squares[currentPosition + index].classList.replace("main-grid", "block");
     })
 }
 
@@ -197,7 +205,7 @@ function freeze() {
     if (current.some(index => squares[currentPosition + index + x].classList.contains('block3') || squares[currentPosition + index + x].classList.contains('block2'))) {
         // make it block2
         current.forEach(index => squares[index + currentPosition].classList.replace('block', 'block2'))
-        // start a new tetromino falling
+            // start a new tetromino falling
         random = nextRandom
         nextRandom = Math.floor(Math.random() * theTetrominoes.length)
         current = theTetrominoes[random][currentRotation]
@@ -219,9 +227,9 @@ function increaseSpeed() {
 
 //Rotate the Tetromino
 function rotate() {
-    undraw()
-    currentRotation++
-    if (currentRotation === current.length) {
+    undraw();
+    currentRotation++;
+    if (currentRotation >= 4) {
         currentRotation = 0
     }
     current = theTetrominoes[random][currentRotation]
@@ -238,17 +246,17 @@ function gameOver() {
 
 //Score
 function addScore() {
-	//ARRUMAR WIDTH HEIGHT
-	var linesmult = 0;
-    for(ci = 0; ci < 220; ci += 10){
-        const row = [ci, ci+1, ci+2, ci+3, ci+4, ci+5, ci+6, ci+7, ci+8, ci+9];
+    //ARRUMAR WIDTH HEIGHT
+    var linesmult = 0;
+    for (ci = 0; ci < 220; ci += 10) {
+        const row = [ci, ci + 1, ci + 2, ci + 3, ci + 4, ci + 5, ci + 6, ci + 7, ci + 8, ci + 9];
 
-        if(row.every(index => squares[index].classList.contains('block2'))){
+        if (row.every(index => squares[index].classList.contains('block2'))) {
             lines += 1
-    		linesmult += 1
+            linesmult += 1
             linesDisplay.innerHTML = lines
             row.forEach(index => {
-                squares[index].classList.replace('block2','main-grid') || squares[index].classList.replace('block','main-grid')
+                squares[index].classList.replace('block2', 'main-grid') || squares[index].classList.replace('block', 'main-grid')
             })
             const squaresRemoved = squares.splice(ci, 10)
             squares = squaresRemoved.concat(squares)
@@ -258,20 +266,20 @@ function addScore() {
 
     }
 
-    if(linesmult > 0){
-    	var scorecount = (linesmult * 10)*linesmult
-    	score = score + scorecount
-    	scoreDisplay.innerHTML = score
-	}
+    if (linesmult > 0) {
+        var scorecount = (linesmult * 10) * linesmult
+        score = score + scorecount
+        scoreDisplay.innerHTML = score
+    }
 
 }
 
-function specialBlock(){
-	for(ci = 0; ci < 220; ci += 10){
-        const row = [ci, ci+1, ci+2, ci+3, ci+4, ci+5, ci+6, ci+7, ci+8, ci+9];
+function specialBlock() {
+    for (ci = 0; ci < 220; ci += 10) {
+        const row = [ci, ci + 1, ci + 2, ci + 3, ci + 4, ci + 5, ci + 6, ci + 7, ci + 8, ci + 9];
 
-        if(row.some(index => squares[index].classList.contains('specialblock'))){
-        	alert('Bloco Special');
+        if (row.some(index => squares[index].classList.contains('specialblock'))) {
+            alert('Bloco Special');
         }
 
 
