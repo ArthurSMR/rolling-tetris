@@ -256,14 +256,6 @@ function freeze() {
     }
 }
 
-function increaseSpeed() {
-    if (speed > 100) {
-        clearInterval(timerId);
-        speed = speed - 25;
-        timerId = setInterval(moveDown, speed);
-    }
-}
-
 //Rotate the Tetromino
 function rotate() {
     undraw();
@@ -273,14 +265,6 @@ function rotate() {
     }
     current = theTetrominoes[random][currentRotation]
     draw()
-}
-
-//Game Over
-function gameOver() {
-    if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
-        alert("Você perdeu, sua pontuação foi de: ")
-        clearInterval(timerId)
-    }
 }
 
 //Score
