@@ -517,7 +517,7 @@ div.main-grid {
     background-color: yellow;
 }
 
-.main-grid, .block, .block2 {
+.main-grid, .block, .block2, .specialblock {
     height: 20px;
     width: 20px;
 }
@@ -544,7 +544,7 @@ div.main-grid {
     background-color: green;
 }
 
-.block4 {
+.specialblock {
     background-color: red;
 }
 

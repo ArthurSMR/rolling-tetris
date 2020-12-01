@@ -34,12 +34,12 @@
         <p>Escolha o tamanho do tabuleiro:</p>
         <form id="table-picker-form">
             <div class="table-picker-input">
-                <p>Largura:</p>
-                <input id="width" type="number" required>
+                <!-- <p>Largura:</p> -->
+                <!-- <input id="width" type="number" required> -->
             </div>
             <div class="table-picker-input">
-                <p>Altura:</p>
-                <input id="height" type="number" required>
+                <!-- <p>Altura:</p> -->
+                <!-- <input id="height" type="number" required> -->
             </div>
             <button id="btn-table-picker">Jogar</button>
         </form>
@@ -51,7 +51,7 @@
                 <!--game table-->
             </div>
             <div class="game-stats">
-                <h3 id="time">00:00</h3>
+                <h3 id="time"><span id="minutes">00</span> : <span id="seconds">00</span> </h3>
                 <div class="wrapper">
                     <div class="fields">
                         <h3>Pontuação: </h3>
@@ -76,7 +76,7 @@
         </div>
     </div>
     <footer>
-        <div class="footer pagina-pequena">
+        <div style="display: none;" class="footer pagina-pequena">
             <div class="coluna">
                 <div class="title">
                     <h2>Rolling Tetris</h2>
