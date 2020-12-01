@@ -3,8 +3,8 @@ const tablePickerBtn = document.getElementById("btn-table-picker");
 
 tablePickerBtn.addEventListener('click', handleSubmit);
 
-var tableWidth = 0;
-var tableHeight = 0;
+var tableWidth = 10;
+var tableHeight = 22;
 var tableSize = 0;
 var speed = 1000;
 var isReversed = false;
@@ -32,8 +32,8 @@ const linesDisplay = document.querySelector('.lines');
 function handleSubmit(event) {
     event.preventDefault();
 
-    tableWidth = document.getElementById("width").value;
-    tableHeight = document.getElementById("height").value;
+    // tableWidth = document.getElementById("width").value;
+    // tableHeight = document.getElementById("height").value;
 
     if (tableWidth >= 10 && tableWidth <= 22) {
         if (tableHeight >= 22 && tableHeight <= 44) {
@@ -152,21 +152,14 @@ const iTetromino = [
     [10, 10 + 1, 10 + 2, 10 + 3]
 ]
 
-// const specialTetromino = [
-//     [0, 0, 0, 0],
-//     [0, 0, 0, 0],
-//     [0, 0, 0, 0],
-//     [0, 0, 0, 0]
-// ]
 const specialTetromino = [
-    [0, 1, 10, 10 + 1],
-    [0, 1, 10, 10 + 1],
-    [0, 1, 10, 10 + 1],
-    [0, 1, 10, 10 + 1]
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0]
 ]
 
-// const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino, specialTetromino]
-const theTetrominoes = [specialTetromino]
+const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino, specialTetromino]
 
 //Randomly Select Tetromino
 let random = Math.floor(Math.random() * theTetrominoes.length)
@@ -251,7 +244,7 @@ function freeze() {
         increaseSpeed()
         draw()
         addScore()
-        // gameOver()
+        gameOver()
     }
 }
 
@@ -274,12 +267,12 @@ function addScore() {
             squares.forEach(cell => grid.appendChild(cell))
 
             if (isSpecialBlock()) {
-                rotateBoard()
+                // rotateBoard()
             }
         }
     }
 
-    if(linesmult > 0){
+    if(linesmult > 0) {
     	var scorecount = (linesmult * 10)*linesmult
     	score = score + scorecount
     	scoreDisplay.innerHTML = score
@@ -289,7 +282,6 @@ function addScore() {
 function rotateBoard() {
     isReversed = !isReversed
     squares.reverse()
-    grid.remove();
     grid = drawReversedGrid()
 }
 
@@ -336,7 +328,7 @@ function rotate() {
 //Game Over
 function gameOver() {
     if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
-        alert("Você perdeu, sua pontuação foi de: ")
+        alert("Você perdeu, sua pontuação foi de: " + score)
         clearInterval(timerId)
         clearInterval(timerPlayed)
     }
