@@ -17,9 +17,14 @@ let currentRotation = 0
 let score = 0
 let lines = 0
 let timerId
+
 let nextRandom = 0
 
 let x = 10;
+
+let timerPlayed
+var seconds = 0
+var minutes = 0
 
 const scoreDisplay = document.querySelector('.score');
 const linesDisplay = document.querySelector('.lines');
@@ -68,8 +73,22 @@ function startGame(){
         disableScrollWithKeyboard()
         draw();
         timerId = setInterval(moveDown, speed);
+        timerPlayed = setInterval(incrementTime, 1000)
         nextRandom = Math.floor(Math.random() * theTetrominoes.length);               
     }
+}
+
+function incrementTime() {
+
+    seconds += 1
+
+    if (seconds == 60) {
+        seconds = 0
+        minutes += 1
+    } 
+
+    document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes
+    document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds
 }
 
 function disableScrollWithKeyboard() {
@@ -304,5 +323,6 @@ function gameOver() {
     if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
         alert("Você perdeu, sua pontuação foi de: ")
         clearInterval(timerId)
+        clearInterval(timerPlayed)
     }
 }
