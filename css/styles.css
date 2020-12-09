@@ -305,7 +305,7 @@ footer .footer .coluna .livre ul li {
 
 .history-content {
     background-color: white;
-    width: 60%;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
@@ -511,13 +511,17 @@ input {
     height: 32px;
 }
 
-/* REFACTOR  */ 
+
+/* REFACTOR  */
 
 div.main-grid {
     background-color: #dcdcdc;
 }
 
-.main-grid, .block, .block2, .specialblock {
+.main-grid,
+.block,
+.block2,
+.specialblock {
     height: 20px;
     width: 20px;
 }
@@ -547,4 +551,3 @@ div.main-grid {
 .specialblock {
     background-color: rgb(194, 34, 34);
 }
-
