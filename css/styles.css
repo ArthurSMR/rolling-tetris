@@ -243,6 +243,7 @@ footer .footer .coluna .livre ul li {
 
 #btn-primary,
 #btn-secondary {
+    text-decoration: none;
     padding: 10px;
     border: none;
     border-radius: 8px;
@@ -370,6 +371,31 @@ td {
     padding-top: 15%;
 }
 
+.input-cadastro .links-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input-cadastro .links-container a {
+    text-decoration: none;
+    font-size: 10px;
+    color: rgb(139, 139, 139);
+    cursor: pointer;
+}
+
+.input-cadastro .links-container .entrar {
+    font-size: 16px;
+    padding: 8px;
+    width: 60%;
+    margin-bottom: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: rgb(38, 99, 255);
+    border-radius: 8px;
+    color: white;
+}
+
 .corpo-login {
     background-color: white;
     width: 25%;
@@ -395,25 +421,7 @@ td {
 }
 
 button.entrar {
-    background-color: rgb(38, 99, 255);
-    border-radius: 8px;
-    height: 32px;
-    color: white;
     width: 60%;
-    margin-bottom: 16px;
-    cursor: pointer;
-    border: none;
-}
-
-button.cadastro {
-    color: rgb(139, 139, 139);
-    font-size: 10px;
-    background: none;
-    border: none;
-    width: 60%;
-    margin-bottom: 16px;
-    cursor: pointer;
-    border: none;
 }
 
 ::placeholder {
