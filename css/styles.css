@@ -423,32 +423,66 @@ button.cadastro {
 
 /* Cadastro */
 
-.corpo-cadastro,
-.info_direita,
-.info_esquerda {
-    margin-top: 3%;
-    width: 100%;
-    float: left;
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.corpo-cadastro {
+    border-radius: 8px;
+    margin-top: 5%;
+    width: 40%;
+    height: 60%;
+    background-color: white;
+}
+
+.form-title {
+    margin-left: 5%;
     color: rgb(66, 159, 252);
 }
 
-.info_esquerda {
-    margin-left: 30%;
-    padding-left: 2%;
-    background-color: white;
-    width: 20%;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-    padding-bottom: 1%;
+.corpo-cadastro form {
+    margin-left: 0%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.info_direita {
-    background-color: white;
-    width: 20%;
-    padding-top: 3.3%;
-    padding-bottom: 0.85%;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+.corpo-cadastro form h3 {
+    color: #429FFC;
+}
+
+.corpo-cadastro form input {
+    width: 80%;
+    height: 32px;
+    margin-right: 24px;
+    margin-bottom: 16px;
+    border: 2px solid rgb(66, 159, 252);
+    border-radius: 8px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.buttons-container a {
+    width: 25%;
+    height: 10%;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid rgb(38, 99, 255);
+    border-radius: 8px;
+    color: rgb(38, 99, 255);
+    cursor: pointer;
+}
+
+.buttons-container .cadastrar {
+    color: white;
+    background-color: rgb(38, 99, 255);
 }
 
 input {
@@ -459,30 +493,6 @@ input {
     border-radius: 8px;
     border-style: solid;
     border-color: rgb(66, 159, 252);
-}
-
-.cancelar {
-    margin-top: 10%;
-    margin-bottom: 16px;
-    background: none;
-    border-color: rgb(38, 99, 255);
-    color: rgb(38, 99, 255);
-    width: 90%;
-    cursor: pointer;
-    height: 40px;
-    border-radius: 8px;
-}
-
-.cadastrar {
-    margin-top: 50%;
-    margin-bottom: 16px;
-    border: none;
-    background-color: rgb(38, 99, 255);
-    color: white;
-    width: 90%;
-    cursor: pointer;
-    height: 40px;
-    border-radius: 8px;
 }
 
 .table-picker {
