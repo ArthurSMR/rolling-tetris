@@ -443,6 +443,7 @@ button.entrar {
     width: 40%;
     height: 60%;
     background-color: white;
+    margin-bottom: 5%;
 }
 
 .form-title {
@@ -474,7 +475,8 @@ button.entrar {
     justify-content: space-evenly;
 }
 
-.buttons-container a {
+.buttons-container a,
+.buttons-container button {
     width: 25%;
     height: 10%;
     margin-top: 10%;
@@ -488,7 +490,8 @@ button.entrar {
     cursor: pointer;
 }
 
-.buttons-container .cadastrar {
+.buttons-container .cadastrar,
+.buttons-container button {
     color: white;
     background-color: rgb(38, 99, 255);
 }
