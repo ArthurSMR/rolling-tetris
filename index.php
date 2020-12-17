@@ -11,13 +11,7 @@
 </head>
 
 <body>
-    <header>
-        <div class="header">
-            <div class="title">
-                <h2>Rolling Tetris</h2>
-            </div>
-        </div>
-    </header>
+    <?php include "raw_header.php"; ?>
 
     <div class="corpo-login">
         <h2 class="login-label h2-login">
@@ -27,10 +21,10 @@
             <input placeholder="Usuário"> <br>
             <input type="password" placeholder="Senha"> <br>
             <div class="links-container">
-                <a href="menu.html" class="entrar">
+                <a href="menu.php" class="entrar">
                     Entrar
                 </a>
-                <a href="cadastro.html">
+                <a href="cadastro.php">
                     Não possui uma conta? Faça o cadastro
                 </a>
             </div>

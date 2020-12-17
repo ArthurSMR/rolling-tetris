@@ -4,25 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rolling Tetris</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap" rel="stylesheet">
+    <title>Rolling Tetris</title>
 </head>
 
 <body>
-    <header>
-        <div class="header">
-            <div class="title">
-                <h2>Rolling Tetris</h2>
-            </div>
-        </div>
-    </header>
+
+    <?php include "header.php"; ?>
 
     <div class="main-container">
         <div class="corpo-cadastro">
             <h1 class="form-title">
-                Cadastro
+                Seus dados
             </h1>
 
             <form>
@@ -54,11 +49,13 @@
             </form>
 
             <div class="buttons-container">
-                <a class="cancelar" href="index.html">Cancelar</a>
-                <a class="cadastrar" href="index.html">Cadastrar</a>
+                <button>Salvar</button>
             </div>
         </div>
     </div>
+
+    <?php include "footer.php"; ?>
+
 </body>
 
 </html>

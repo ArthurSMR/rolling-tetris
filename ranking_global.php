@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap" rel="stylesheet">
+    <title>Rolling Tetris</title>
+</head>
+
+<body>
+
+    <?php include "header.php"; ?>
+
+    <div class="history-content">
+        <h2>
+            Ranking Global
+        </h2>
+        <table class="table-history">
+            <tr>
+                <th>Username</th>
+                <th>Pontuação</th>
+                <th>Nível máximo</th>
+            </tr>
+            <tr>
+                <td>Menino Ney</td>
+                <td>5000pts</td>
+                <td>Difícil</td>
+            </tr>
+            <tr>
+                <td>Menino Ney</td>
+                <td>5000pts</td>
+                <td>Normal</td>
+            </tr>
+            <tr>
+                <td>Menino Ney</td>
+                <td>5000pts</td>
+                <td>Normal</td>
+            </tr>
+            <tr>
+                <td>Menino Ney</td>
+                <td>5000pts</td>
+                <td>Fácil</td>
+            </tr>
+            <tr>
+                <td>Menino Ney</td>
+                <td>5000pts</td>
+                <td>Difícil</td>
+            </tr>
+        </table>
+    </div>
+
+    <?php include "footer.php"; ?>
+
+</body>
+
+</html>
