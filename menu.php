@@ -3,10 +3,10 @@
 
 <head>
     <title>Rolling Tetris</title>
-
     <meta charset="utf-8">
-
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <style>
+         <?php include "css/styles.css"; ?>
+    </style>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap" rel="stylesheet">
 </head>

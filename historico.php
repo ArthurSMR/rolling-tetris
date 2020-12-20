@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórico</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <style>
+         <?php include "css/styles.css"; ?>
+    </style>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap" rel="stylesheet">
 </head>
