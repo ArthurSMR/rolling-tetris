@@ -1,3 +1,10 @@
+<?php 
+    session_start();
+    $logado = $_SESSION['logado'];
+    if($logado != 1){
+        header('Location: index.php?aviso=3');
+    }else{
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,3 +72,5 @@
 </body>
 
 </html>
+
+<?php } ?>

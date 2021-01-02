@@ -481,7 +481,7 @@ button.entrar {
     justify-content: space-evenly;
 }
 
-.buttons-container a,
+/*.buttons-container a,
 .buttons-container button {
     width: 25%;
     height: 10%;
@@ -500,7 +500,7 @@ button.entrar {
 .buttons-container button {
     color: white;
     background-color: rgb(38, 99, 255);
-}
+}*/
 
 input {
     padding-left: 1%;
@@ -577,4 +577,85 @@ div.main-grid {
 
 .specialblock {
     background-color: rgb(194, 34, 34);
+}
+
+.cadastro{
+    text-align: center;
+}
+
+.cadastro h3{
+    text-align: left;
+    padding-left: 10%;
+}
+
+.cadastro .buttons-container button,.cadastro .buttons-container a{
+    font-family: 'Goldman', cursive;
+    width: 150px;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #429ffc;
+}
+
+.cadastro .buttons-container button{
+    background-color: #429ffc;
+    color: #FFF;
+}
+
+.cadastro .buttons-container button:hover{
+    background-color: #5eacfb;
+    border-color: #5eacfb;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.cadastro .buttons-container a{
+    color: #429ffc; 
+}
+
+.cadastro .buttons-container a:hover{
+    background-color: #429ffc;
+    color: #FFF; 
+    transition: 0.5s;
+}
+
+.corpo-login .entrar{
+    background-color: rgb(38, 99, 255);
+    color: #FFF;
+    border: none;
+    font-size: 18px;
+    font-family: 'Goldman', cursive;
+}
+
+.cadastrado .container{
+    width: 30%;
+    background-color: #FFF;
+    margin: 20px 35%;
+    text-align: center;
+    height: 150px;
+    border-radius: 10px;
+}
+
+.cadastrado .container h2{
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+
+.cadastrado .container .button{
+    margin: 20px auto;
+    width: 600px;
+    display: block;
+}
+
+.corpo-login .erro{
+    color: red;
+}
+
+.corpo-login .sucesso{
+    color: green;
 }

@@ -1,3 +1,10 @@
+<?php 
+    session_start();
+    $logado = $_SESSION['logado'];
+    if($logado != 0){
+        header('Location: menu.php');
+    }else{
+?>
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -21,41 +28,39 @@
             <h1 class="form-title">
                 Cadastro
             </h1>
-
-            <form>
-                <div class="first-column">
-                    <h3>
-                        Usuário
-                    </h3>
-                    <input>
-                    <h3>
-                        Nome
-                    </h3>
-                    <input> <br>
-                    <h3>
-                        Senha
-                    </h3>
-                    <input type="password"> <br>
+            <form class="cadastro"  method="post" action="registra_usuario.php" id="registra_usuario">
+                <div>
+                	<h3>Usuário</h3>
+                    <input type="text" name="usuario" id="usuario" required="true">
+                    
+                    <h3>Senha</h3>
+                    <input type="password" name="senha" id="senha" required="true">
                 </div>
-
-                <div class="second-column">
-                    <h3>
-                        Email
-                    </h3>
-                    <input type="email"> <br>
-                    <h3>
-                        Sobrenome
-                    </h3>
-                    <input> <br>
+                <div class="column">
+                    <h3>Nome Completo</h3>
+                    <input type="text" name="nome" id="nome" required="true">
+                   
+                    <h3>Data de Nascimento</h3>
+                    <input type="date" name="data" id="data" required="true">
+                    
+                    <h3>CPF</h3>
+                    <input type="text" name="cpf" id="cpf" required="true">
+                    
+                    <h3>Telefone</h3>
+                    <input type="text" name="telefone" id="telefone" required="true">
+                    
+                    <h3>Email</h3>
+                    <input type="email" name="email" id="email" required="true">
                 </div>
+                <div class="buttons-container">
+                	<a class="cancelar" href="index.php">Voltar</a>
+                	<button type="submit">Cadastrar</button>
+            	</div>
             </form>
-
-            <div class="buttons-container">
-                <a class="cancelar" href="index.php">Cancelar</a>
-                <a class="cadastrar" href="index.php">Cadastrar</a>
-            </div>
-        </div>
+	    </div>
     </div>
 </body>
 
 </html>
+
+<?php } ?>
