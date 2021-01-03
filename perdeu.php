@@ -19,12 +19,37 @@
 
 <body>
 
-    <?php include "header.php"; ?>
+    <?php include "header.php";
 
+        $username = $_GET['username']; 
+        $pontos = $_GET['pontos']; 
+        $tempo = $_GET['tempo']; 
+
+        $pontosAsString = strval($pontos);
+        $tempoAsString = strval($tempo);
+
+        // Saving match to database
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=tetris", "root", "");
+            $sql = "INSERT INTO matches
+                VALUES('$username', $pontosAsString, 'Normal', $tempoAsString)";
+
+            $conn->exec($sql);
+
+        } catch(PDOException $e) {
+            echo "Ocorreu um erro: " .$e->getMessage();
+        }
+    ?>
     <div class="conteudo">
         <div class="perdeu">
-                <h2>Acabou a partida de <span class="sucesso">(Nome do usuário)</span> com um total de <span class="sucesso">(1000)</span> pontos, em um tempo de <span class="sucesso">(00:00)</span> na dificuldade <span class="sucesso">(Normal)</span>.</h2>
-                <p><a href="jogo.php"><button class="retry">Jogar Novamente</button></a></p>
+             <?php 
+             echo '
+                <h2>Acabou a partida de <span class="sucesso">' .$username.
+                 '</span> com um total de <span class="sucesso">' .$pontos.
+                  '</span> pontos, em um tempo de <span class="sucesso">' .$tempo. 
+                  '</span> na dificuldade <span class="sucesso">Normal</span>.</h2>
+                <p><a href="jogo.php"><button class="retry">Jogar Novamente</button></a></p> '
+            ?>
         </div>
     </div>
 

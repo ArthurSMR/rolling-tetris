@@ -24,6 +24,7 @@ let x = 10;
 
 let timerPlayed
 var seconds = 0
+var totalSeconds = 0
 var minutes = 0
 
 const scoreDisplay = document.querySelector('.score');
@@ -81,6 +82,7 @@ function startGame() {
 function incrementTime() {
 
     seconds += 1
+    totalSeconds += 1
 
     if (seconds == 60) {
         seconds = 0
@@ -347,7 +349,7 @@ function rotate() {
 //Game Over
 function gameOver() {
     if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
-        window.location.replace('http://localhost:8080/rolling-tetris-bla/menu.php');
+        // window.location.replace('http://localhost:8080/rolling-tetris-bla/perdeu.php?username=' + username + "pontos=" + score + "tempo=" totalSeconds);
         clearInterval(timerId)
         clearInterval(timerPlayed)
     }
