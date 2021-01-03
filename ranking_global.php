@@ -14,7 +14,48 @@
 
 <body>
 
-    <?php include "header.php"; ?>
+    <?php 
+        include "header.php"; 
+
+        // Creating table
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=matchesDB", "root", "");
+            $createTableSQLCommand = "CREATE TABLE matches (
+                user_id int PRIMARY KEY,
+                username varchar(100),
+                score int)";
+
+            $conn->exec($createTableSQLCommand);
+            echo "create with sucess";
+        } catch(PDOException $e) {
+            echo "Ocorreu um erro: " .$e->getMessage();
+        }
+        
+        // Inserting mock
+        // try {
+        //     $conn = new PDO("mysql:host=localhost;dbname=matchesDB", "root", "");
+        //     // $sql = "INSERT INTO matches values(
+        //     //     Arthur"
+
+        //     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        //         echo "<p>Usuário: " .$row["usuario"]. " </p>";
+        //     }
+        // } catch(PDOException $e) {
+        //     echo "Ocorreu um erro: " .$e->getMessage();
+        // }
+
+        // // Retriving data
+        // try {
+        //     $conn = new PDO("mysql:host=localhost;dbname=matchesDB", "root", "");
+        //     $stmt = $conn->query("SELECT * FROM matches");
+
+        //     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        //         echo "<p>Usuário: " .$row["usuario"]. " </p>";
+        //     }
+        // } catch(PDOException $e) {
+        //     echo "Ocorreu um erro: " .$e->getMessage();
+        // }
+    ?>
 
     <div class="history-content">
         <h2>
