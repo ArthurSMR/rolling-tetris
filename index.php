@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    if(isset($_SESSION['usuario'])){
+    if(isset($_SESSION['logado'])){
         $logado = $_SESSION['logado'];
     }else{
         $logado = 0;
