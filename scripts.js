@@ -347,7 +347,7 @@ function rotate() {
 //Game Over
 function gameOver() {
     if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
-        alert("Você perdeu, sua pontuação foi de: " + score)
+        window.location.replace('http://localhost:8080/rolling-tetris-bla/menu.php');
         clearInterval(timerId)
         clearInterval(timerPlayed)
     }
