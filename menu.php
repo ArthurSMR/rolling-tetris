@@ -1,6 +1,12 @@
+<?php session_start(); ?>
+<?php 
+    $logado = $_SESSION['logado'];
+    if($logado != 1){
+        header('Location: index.php?aviso=3');
+    }else{
+?>
 <!DOCTYPE html>
 <html lang="pt">
-
 <head>
     <title>Rolling Tetris</title>
     <meta charset="utf-8">
@@ -25,7 +31,7 @@
                 <li><a href="ranking_global.php">Ranking Global</a></li>
                 <li><a href="historico.php">Histórico de Partidas</a></li>
                 <li><a href="perfil.php">Minha Conta</a></li>
-                <li><a href="index.php">Sair</a></li>
+                <li><a href="deslogar.php">Sair</a></li>
             </ul>
         </div>
     </div>
@@ -35,3 +41,5 @@
 </body>
 
 </html>
+
+<?php } ?>

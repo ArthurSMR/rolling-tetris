@@ -1,3 +1,10 @@
+<?php 
+    session_start();
+    $logado = $_SESSION['logado'];
+    if($logado != 0){
+        header('Location: menu.php');
+    }else{
+?>
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -13,19 +20,30 @@
 </head>
 
 <body>
+    <?php $aviso = isset($_GET['aviso']) ? ($_GET['aviso']) : 0; ?>
+
     <?php include "raw_header.php"; ?>
 
     <div class="corpo-login">
         <h2 class="login-label h2-login">
             Login
         </h2>
-        <form class="input-cadastro">
-            <input placeholder="Usuário"> <br>
-            <input type="password" placeholder="Senha"> <br>
+        <?php if($aviso == 2){ ?>    
+            <p class="sucesso">O Usuário Foi Deslogado com Sucesso.</p>
+        <?php } ?>
+        <?php if($aviso == 3){ ?>    
+            <p class="erro">É Necessário Realizar o Login para Acessar esta Página.</p>
+        <?php } ?>
+        <form class="input-cadastro" method="post" action="verifica_usuario.php" id="verifica_usuario">
+            <input placeholder="Usuário" name="usuario" id="usuario"> <br>
+            <input type="password" name="senha" id="senha" placeholder="Senha"> <br>
+            <?php if($aviso == 1){ ?>    
+                <p class="erro">O Usuário ou Senha Digitados Estão Incorretos.</p>
+            <?php } ?>
             <div class="links-container">
-                <a href="menu.php" class="entrar">
+                <button type="submit" class="entrar">
                     Entrar
-                </a>
+                </button>
                 <a href="cadastro.php">
                     Não possui uma conta? Faça o cadastro
                 </a>
@@ -35,3 +53,5 @@
 </body>
 
 </html>
+
+<?php } ?>
