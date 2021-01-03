@@ -1,10 +1,3 @@
-<?php 
-    session_start();
-    $logado = $_SESSION['logado'];
-    if($logado != 1){
-        header('Location: index.php?aviso=3');
-    }else{
-?>
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -21,47 +14,16 @@
 
 <body>
 
-    <?php 
+<?php 
         include "header.php"; 
 
-        // Creating table
+        // Retriving data
         try {
-            $conn = new PDO("mysql:host=localhost;dbname=matchesDB", "root", "");
-            $createTableSQLCommand = "CREATE TABLE matches (
-                user_id int PRIMARY KEY,
-                username varchar(100),
-                score int)";
-
-            $conn->exec($createTableSQLCommand);
-            echo "create with sucess";
+            $conn = new PDO("mysql:host=localhost;dbname=tetris", "root", "");
+            $stmt = $conn->query("SELECT * FROM matches ORDER BY score DESC LIMIT 10");
         } catch(PDOException $e) {
             echo "Ocorreu um erro: " .$e->getMessage();
         }
-        
-        // Inserting mock
-        // try {
-        //     $conn = new PDO("mysql:host=localhost;dbname=matchesDB", "root", "");
-        //     // $sql = "INSERT INTO matches values(
-        //     //     Arthur"
-
-        //     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        //         echo "<p>Usuário: " .$row["usuario"]. " </p>";
-        //     }
-        // } catch(PDOException $e) {
-        //     echo "Ocorreu um erro: " .$e->getMessage();
-        // }
-
-        // // Retriving data
-        // try {
-        //     $conn = new PDO("mysql:host=localhost;dbname=matchesDB", "root", "");
-        //     $stmt = $conn->query("SELECT * FROM matches");
-
-        //     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        //         echo "<p>Usuário: " .$row["usuario"]. " </p>";
-        //     }
-        // } catch(PDOException $e) {
-        //     echo "Ocorreu um erro: " .$e->getMessage();
-        // }
     ?>
 
     <div class="history-content">
@@ -72,33 +34,22 @@
             <tr>
                 <th>Username</th>
                 <th>Pontuação</th>
-                <th>Nível máximo</th>
+                <th>Dificuldade</th>
+                <th>Tempo</th>
             </tr>
-            <tr>
-                <td>Menino Ney</td>
-                <td>5000pts</td>
-                <td>Difícil</td>
-            </tr>
-            <tr>
-                <td>Menino Ney</td>
-                <td>5000pts</td>
-                <td>Normal</td>
-            </tr>
-            <tr>
-                <td>Menino Ney</td>
-                <td>5000pts</td>
-                <td>Normal</td>
-            </tr>
-            <tr>
-                <td>Menino Ney</td>
-                <td>5000pts</td>
-                <td>Fácil</td>
-            </tr>
-            <tr>
-                <td>Menino Ney</td>
-                <td>5000pts</td>
-                <td>Difícil</td>
-            </tr>
+            
+            <?php
+            
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                echo '<tr>
+                        <td>' .$row["username"]. ' </td>
+                        <td>' .$row["score"]. ' </td>
+                        <td>' .$row["difficulty"]. ' </td>
+                        <td>' .$row["time_played"]. ' </td>
+                    </tr>';
+            } 
+            ?>
+            
         </table>
     </div>
 
@@ -107,5 +58,3 @@
 </body>
 
 </html>
-
-<?php } ?>
