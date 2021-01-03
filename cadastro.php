@@ -1,6 +1,10 @@
 <?php 
     session_start();
-    $logado = $_SESSION['logado'];
+    if(isset($_SESSION['logado'])){
+        $logado = $_SESSION['logado'];
+    }else{
+        $logado = 0;
+    }
     if($logado != 0){
         header('Location: menu.php');
     }else{
