@@ -349,7 +349,7 @@ function rotate() {
 //Game Over
 function gameOver() {
     if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
-        // window.location.replace('http://localhost:8080/rolling-tetris-bla/perdeu.php?username=' + username + "pontos=" + score + "tempo=" totalSeconds);
+        window.location.replace('http://localhost:8080/rolling-tetris/perdeu.php?pontos=' + score + '&tempo=' + totalSeconds);
         clearInterval(timerId)
         clearInterval(timerPlayed)
     }

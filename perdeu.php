@@ -21,7 +21,7 @@
 
     <?php include "header.php";
 
-        $username = $_GET['username']; 
+        $username = $_SESSION['usuario']; 
         $pontos = $_GET['pontos']; 
         $tempo = $_GET['tempo']; 
 
