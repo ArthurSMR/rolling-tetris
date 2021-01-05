@@ -21,6 +21,7 @@
 			
 			$_SESSION['logado'] = 1;
 			$_SESSION['usuario'] = $usuario;
+			$_SESSION['user_id'] = $user['user_id'];
 
 			header('Location: menu.php');
 		}else{

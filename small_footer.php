@@ -1,5 +1,5 @@
 <footer>
-    <div class="footer">
+    <div class="footer pagina-pequena">
         <div class="coluna">
             <div class="title">
                 <h2>Rolling Tetris</h2>

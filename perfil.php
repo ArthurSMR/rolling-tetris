@@ -27,8 +27,7 @@
         $sname = "localhost";
         $uname = "root";
 
-        // to change
-        $userId = 2;
+        $userId = $_SESSION['user_id'];
 
         try {
             $conn = new PDO("mysql:host=$sname;dbname=tetris", $uname, null);
@@ -58,27 +57,17 @@
                             Usuário *
                         </h3>
                         <?php 
-                            $username = $row['username'];
-                            echo "<input name='username' value='$username'>";
+                            $usuario = $row['usuario'];
+                            echo "<input name='usuario' value='$usuario'>";
                         ?>
                         <h3>
                             Nome *
                         </h3>
                         <?php 
-                            $name = $row['name'];
-                            echo "<input name='name' value='$name'>";
+                            $nome = $row['nome'];
+                            echo "<input name='nome' value='$nome'>";
                         ?>
-                        <h3>
-                            Senha *
-                        </h3>
-                        <?php 
-                            $password = $row['password'];
-                            echo "<input name='password' value='$password'>";
-                        ?>
-                    </div>
-
-                    <div class="second-column">
-                        <h3>
+                         <h3>
                             Email *
                         </h3>
                         <?php 
@@ -86,11 +75,35 @@
                             echo "<input name='email' value='$email'>";
                         ?>
                         <h3>
-                            Sobrenome
+                            CPF *
                         </h3>
                         <?php 
-                            $surname = $row['surname'];
-                            echo "<input name='surname' value='$surname'>";
+                            $cpf = $row['cpf'];
+                            echo "<input name='cpf' value='$cpf'>";
+                        ?>
+                    </div>
+
+                    <div class="second-column">
+                        <h3>
+                            Senha *
+                        </h3>
+                        <?php 
+                            $senha = $row['senha'];
+                            echo "<input name='senha' value='$senha'>";
+                        ?>
+                        <h3>
+                            Telefone
+                        </h3>
+                        <?php 
+                            $telefone = $row['telefone'];
+                            echo "<input name='telefone' value='$telefone'>";
+                        ?>
+                        <h3>
+                            Data
+                        </h3>
+                        <?php 
+                            $data = $row['data'];
+                            echo "<input name='data' type='date' value='$data'>";
                         ?>
                     </div>
                 </div>
@@ -104,9 +117,9 @@
     <?php
         try {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $user = array($_POST["username"], $_POST["name"], $_POST["surname"], $_POST["email"], $_POST["password"]);
+                $user = array($_POST["usuario"], $_POST["nome"], $_POST["senha"], $_POST["telefone"], $_POST["email"], $_POST["cpf"], $_POST["data"]);
     
-                $sql = "UPDATE tb_user SET username='$user[0]', name='$user[1]', surname='$user[2]', email='$user[3]', password='$user[4]' WHERE user_id=$userId";
+                $sql = "UPDATE tb_user SET usuario='$user[0]', nome='$user[1]', senha='$user[2]', telefone='$user[3]', email='$user[4]', cpf='$user[5]', data='$user[6]' WHERE user_id=$userId";
     
                 $conn->exec($sql);
             }
