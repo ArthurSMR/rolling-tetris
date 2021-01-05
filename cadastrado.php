@@ -15,13 +15,10 @@
 <body>
     <?php include "raw_header.php"; ?>
 
-    <div class="cadastrado">
-        <div class="container">
-            <h2 class="title">O Usuário foi Cadastrado com sucesso</h2>
-            <br>
-            <div class="button">
-                <a href="index.php">Fazer Login</a>
-            </div>
+     <div class="conteudo">
+        <div class="perdeu">
+                <h2 style="text-align: center;">O Usuário Foi Cadastrado com Sucesso</h2>
+                <p><a href="index.php.php"><button class="retry">Jogar Novamente</button></a></p> 
         </div>
     </div>
 </body>

@@ -1,16 +1,17 @@
 <footer>
     <div class="footer">
         <div class="coluna">
-            <div class="title">
-                <h2>Rolling Tetris</h2>
-            </div>
+            <a href="menu.php">
+                <div class="title">
+                    <h2>Rolling Tetris</h2>
+                </div>
+            </a>
         </div>
         <div class="coluna">
             <div class="menu">
                 <ul type="none">
-                    <li><a href="menu.html">Início</a></li>
-                    <li><a href="jogo.html">Tetris</a></li>
-                    <li><a href="ranking_global.html">Ranking Global</a></li>
+                    <li><a href="jogo.php">Tetris</a></li>
+                    <li><a href="ranking_global.php">Ranking Global</a></li>
                 </ul>
             </div>
         </div>
@@ -18,7 +19,7 @@
             <div class="livre">
                 <div class="menu">
                     <ul type="none">
-                        <li><a href="#">Minha Conta</a></li>
+                        <li><a href="perfil.php">Minha Conta</a></li>
                         <li><a href="historico.html">Hístorico de Partidas</a></li>
                     </ul>
                 </div>

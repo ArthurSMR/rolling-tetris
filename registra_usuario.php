@@ -15,12 +15,25 @@
 
 	$inserir_aluno = "INSERT INTO tb_user(usuario, senha, nome, data, cpf, telefone, email) VALUES('$usuario', '$senha', '$nome', '$data', '$cpf', '$telefone', '$email')";
 
-	if(mysqli_query($link, $inserir_aluno)){
-		header('Location: cadastrado.php');
+	$usuario_existe = "SELECT usuario FROM tb_user WHERE usuario = '$usuario'";
+
+	$conecta_bd_usuario = mysqli_query($link, $usuario_existe);
+
+	if($conecta_bd_usuario){
+		$usuario_bd = mysqli_fetch_array($conecta_bd_usuario);
+
+		if(isset($usuario_bd['usuario'])){
+			header('Location: cadastro.php?erro=1');
+		}else{
+			if(mysqli_query($link, $inserir_aluno)){
+				echo $usuario_existe;
+				header('Location: cadastrado.php');
+			}else{
+				echo "Erro ao registrar";
+			}
+		}
 	}else{
-		echo "Erro ao registrar";
+		echo "erro na consulta";
 	}
-
-
 	
 ?>
