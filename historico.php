@@ -30,7 +30,7 @@
         try {
             $conn = new PDO("mysql:host=localhost;dbname=tetris", "root", "");
             $sqlCommand = "SELECT * FROM matches WHERE username = '{$username}'";
-            echo $sqlCommand;
+
             $stmt = $conn->query($sqlCommand);
         } catch(PDOException $e) {
             echo "Ocorreu um erro: " .$e->getMessage();
