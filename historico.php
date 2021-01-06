@@ -21,7 +21,22 @@
 
 <body>
 
-    <?php include "header.php"; ?>
+    <?php 
+        include "header.php"; 
+        // Retriving data
+
+        $username = $_SESSION['usuario'];
+
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=tetris", "root", "");
+            $sqlCommand = "SELECT * FROM matches WHERE username = '{$username}'";
+            echo $sqlCommand;
+            $stmt = $conn->query($sqlCommand);
+        } catch(PDOException $e) {
+            echo "Ocorreu um erro: " .$e->getMessage();
+        }
+
+    ?>
     
     <div class="history-content">
         <h2>
@@ -34,36 +49,20 @@
                 <th>Nível atingido</th>
                 <th>Tempo</th>
             </tr>
-            <tr>
-                <td>Menino Ney</td>
-                <td>5000pts</td>
-                <td>Difícil</td>
-                <td>04:56</td>
-            </tr>
-            <tr>
-                <td>Menino Ney</td>
-                <td>5000pts</td>
-                <td>Normal</td>
-                <td>04:22</td>
-            </tr>
-            <tr>
-                <td>Menino Ney</td>
-                <td>5000pts</td>
-                <td>Normal</td>
-                <td>11:20</td>
-            </tr>
-            <tr>
-                <td>Menino Ney</td>
-                <td>5000pts</td>
-                <td>Fácil</td>
-                <td>21:41</td>
-            </tr>
-            <tr>
-                <td>Menino Ney</td>
-                <td>5000pts</td>
-                <td>Difícil</td>
-                <td>02:10</td>
-            </tr>
+            <?php
+            
+            $username = $_SESSION['usuario'];
+
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                echo '<tr>
+                         
+                        <td>' .$row["username"]. ' </td>
+                        <td>' .$row["score"]. ' </td>
+                        <td>' .$row["difficulty"]. ' </td>
+                        <td>' .$row["time_played"]. ' </td>
+                    </tr>';
+            } 
+            ?>
         </table>
     </div>
 
