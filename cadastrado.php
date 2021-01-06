@@ -18,7 +18,7 @@
      <div class="conteudo">
         <div class="perdeu">
                 <h2 style="text-align: center;">O Usuário Foi Cadastrado com Sucesso</h2>
-                <p><a href="index.php.php"><button class="retry">Jogar Novamente</button></a></p> 
+                <p><a href="index.php"><button class="retry">Fazer login</button></a></p> 
         </div>
     </div>
 </body>
