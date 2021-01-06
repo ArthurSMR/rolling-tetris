@@ -652,7 +652,7 @@ div.main-grid {
     display: block;
 }
 
-.corpo-login .erro{
+.corpo-login .erro, .erro{
     color: red;
 }
 

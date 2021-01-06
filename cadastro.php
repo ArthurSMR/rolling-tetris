@@ -32,6 +32,12 @@
             <h1 class="form-title">
                 Cadastro
             </h1>
+            <?php 
+                $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
+                if($erro == 1){
+            ?>
+                <p class="erro" style="padding-left: 50px;">Já Existe um Cadastro com este Usuário</p>
+            <?php } ?>
             <form class="cadastro"  method="post" action="registra_usuario.php" id="registra_usuario">
                 <div>
                 	<h3>Usuário</h3>

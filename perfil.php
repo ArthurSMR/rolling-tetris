@@ -1,4 +1,6 @@
-<?php 
+<?php
+    ob_start();
+
     session_start();
     $logado = $_SESSION['logado'];
     if($logado != 1){
@@ -122,6 +124,8 @@
                 $sql = "UPDATE tb_user SET usuario='$user[0]', nome='$user[1]', senha='$user[2]', telefone='$user[3]', email='$user[4]', cpf='$user[5]', data='$user[6]' WHERE user_id=$userId";
     
                 $conn->exec($sql);
+
+                header("Refresh:0");
             }
         } catch (PDOException $e) {
             echo "Update error: " . $e->getMessage();
